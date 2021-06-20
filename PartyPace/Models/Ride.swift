@@ -8,20 +8,21 @@
 import Foundation
 
 
-enum privacy {
-    case publicRide
-    case privateRide
-    case groupRide
-    case mutualFriends
-    case friendsOfFriends
-}
-
 class Ride {
     var name: String?
     var StartTime: Date?
-    var ridePrivacy: privacy?
+    var ridePrivacy: privacyChoices?
     var ridePace: paceChoices?
-    route
-    tirerecommendation
+    var route: String?
+    var minTire: tireChoices?
+    
+    init(rideName: String?, time: Date, paceSetting: paceChoices, tireRecommendation: tireChoices, privacySetting: privacyChoices) {
+        name = rideName
+        StartTime = time
+        ridePrivacy = privacySetting
+        ridePace = paceSetting
+        minTire = tireRecommendation
+        
+    }
     
 }

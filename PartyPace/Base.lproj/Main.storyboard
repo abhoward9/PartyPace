@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Ride Creation View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="PartyPace" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="RideCreationViewController" customModule="PartyPace" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -43,9 +43,13 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="nk6-dd-daa">
                                 <rect key="frame" x="75" y="230" width="240" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="cBC-Ob-sZj" appends="YES" id="Wkp-eG-gUl"/>
+                                </connections>
                             </mapView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQw-nd-LuN">
-                                <rect key="frame" x="94" y="381" width="42" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pace" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQw-nd-LuN">
+                                <rect key="frame" x="94" y="381" width="38" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -55,6 +59,36 @@
                                 <rect key="frame" x="149" y="366" width="148" height="59"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Minimum tire size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ssr-f5-Cax">
+                                <rect key="frame" x="90" y="462" width="133" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xsu-HF-hWU">
+                                <rect key="frame" x="231" y="433" width="141" height="67"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e8l-Rf-tBk">
+                                <rect key="frame" x="153" y="593" width="85" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Create Ride!"/>
+                                <connections>
+                                    <action selector="CreateRideButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="E4j-rE-jHF"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Privacy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qVL-m5-IMQ">
+                                <rect key="frame" x="75" y="521" width="56" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yor-1A-Gr9">
+                                <rect key="frame" x="139" y="508" width="181" height="45"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </pickerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -62,12 +96,69 @@
                     <navigationItem key="navigationItem" id="7uH-8Q-Yvs"/>
                     <connections>
                         <outlet property="attendanceList" destination="O0o-W1-h8h" id="XrL-e2-0kd"/>
+                        <outlet property="paceLabel" destination="LQw-nd-LuN" id="0l5-4P-mpm"/>
                         <outlet property="pacePicker" destination="0Kr-s3-BXt" id="uNV-Sh-vKq"/>
+                        <outlet property="privacyPicker" destination="Yor-1A-Gr9" id="rDY-6i-4oI"/>
+                        <outlet property="rideMap" destination="nk6-dd-daa" id="RUN-Rh-DRS"/>
+                        <outlet property="rideTitleField" destination="ngb-bl-NHf" id="mWd-59-CKQ"/>
+                        <outlet property="tireSizeLabel" destination="Ssr-f5-Cax" id="45J-YN-vAn"/>
+                        <outlet property="tireSizePicker" destination="Xsu-HF-hWU" id="hgp-qR-Lpi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="cBC-Ob-sZj">
+                    <connections>
+                        <segue destination="6HH-C6-upj" kind="show" id="vWr-or-3lX"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1760.8695652173915" y="-48.214285714285715"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="6Fc-x7-B7D">
+            <objects>
+                <viewController id="6HH-C6-upj" customClass="MapViewController" customModule="PartyPace" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UL3-Fo-BpA">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="p6v-wX-sOY">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="FIf-7D-oLl" appends="YES" id="jQG-Av-Ga7"/>
+                                </connections>
+                            </mapView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="QAK-fM-6Mz"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="p6v-wX-sOY" firstAttribute="top" secondItem="QAK-fM-6Mz" secondAttribute="top" id="BRF-R5-KPH"/>
+                            <constraint firstItem="p6v-wX-sOY" firstAttribute="bottom" secondItem="QAK-fM-6Mz" secondAttribute="bottom" id="dwY-6r-6EC"/>
+                            <constraint firstItem="p6v-wX-sOY" firstAttribute="leading" secondItem="QAK-fM-6Mz" secondAttribute="leading" id="vv4-td-b9T"/>
+                            <constraint firstItem="QAK-fM-6Mz" firstAttribute="trailing" secondItem="p6v-wX-sOY" secondAttribute="trailing" id="xgj-NG-Vju"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="xRV-HC-W9l">
+                        <barButtonItem key="rightBarButtonItem" title="Set Start Point" id="c0T-Aj-Ep9">
+                            <connections>
+                                <segue destination="8Sy-kN-wB3" kind="unwind" unwindAction="unwindToCreationView:" id="PbN-lP-JL1"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="fullMapView" destination="p6v-wX-sOY" id="OTx-TJ-6bY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yp6-ab-biX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="8Sy-kN-wB3" userLabel="Exit" sceneMemberID="exit"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="FIf-7D-oLl">
+                    <connections>
+                        <action selector="mapLongPressed:" destination="6HH-C6-upj" id="pXT-KA-LHc"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="2730" y="-48"/>
         </scene>
         <!--Ride Organization View Controller-->
         <scene sceneID="CLm-wt-2fa">
@@ -110,6 +201,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="uD2-ba-ySg" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mmw-zA-N61">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
