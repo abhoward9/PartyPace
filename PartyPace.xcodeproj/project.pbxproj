@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4951B60F2689662300ADD5AA /* RideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4951B60E2689662300ADD5AA /* RideViewController.swift */; };
 		49903C51267C6AE600814BA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49903C50267C6AE600814BA6 /* AppDelegate.swift */; };
 		49903C53267C6AE600814BA6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49903C52267C6AE600814BA6 /* SceneDelegate.swift */; };
 		49903C55267C6AE600814BA6 /* RideCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49903C54267C6AE600814BA6 /* RideCreationViewController.swift */; };
@@ -14,13 +15,17 @@
 		49903C5A267C6AE700814BA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49903C59267C6AE700814BA6 /* Assets.xcassets */; };
 		49903C5D267C6AE700814BA6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49903C5B267C6AE700814BA6 /* LaunchScreen.storyboard */; };
 		49903C65267C6B6B00814BA6 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49903C64267C6B6B00814BA6 /* Person.swift */; };
-		49903C6A267D8FFD00814BA6 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49903C69267D8FFD00814BA6 /* CollectionViewCell.swift */; };
 		49903C6C267DB5EC00814BA6 /* RideOrganizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49903C6B267DB5EC00814BA6 /* RideOrganizationViewController.swift */; };
 		49903C6E267DBA4C00814BA6 /* Ride.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49903C6D267DBA4C00814BA6 /* Ride.swift */; };
+		49F1884B268EEA4E008BAAEA /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F1884A268EEA4E008BAAEA /* JSON.swift */; };
 		49FDFD2E267FF08100535301 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FDFD2D267FF08100535301 /* MapViewController.swift */; };
+		B7F07FEAC634509A9288BB1F /* Pods_PartyPace.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 437F9E8FFDBF5F801D06BCA2 /* Pods_PartyPace.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A630C538408D9D823BC97C6 /* Pods-PartyPace.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PartyPace.debug.xcconfig"; path = "Target Support Files/Pods-PartyPace/Pods-PartyPace.debug.xcconfig"; sourceTree = "<group>"; };
+		437F9E8FFDBF5F801D06BCA2 /* Pods_PartyPace.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PartyPace.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4951B60E2689662300ADD5AA /* RideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideViewController.swift; sourceTree = "<group>"; };
 		49903C4D267C6AE600814BA6 /* PartyPace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PartyPace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49903C50267C6AE600814BA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49903C52267C6AE600814BA6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -30,10 +35,11 @@
 		49903C5C267C6AE700814BA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		49903C5E267C6AE700814BA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		49903C64267C6B6B00814BA6 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Person.swift; path = ../Models/Person.swift; sourceTree = "<group>"; };
-		49903C69267D8FFD00814BA6 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		49903C6B267DB5EC00814BA6 /* RideOrganizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideOrganizationViewController.swift; sourceTree = "<group>"; };
 		49903C6D267DBA4C00814BA6 /* Ride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ride.swift; sourceTree = "<group>"; };
+		49F1884A268EEA4E008BAAEA /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		49FDFD2D267FF08100535301 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		92815B08FAB1E9B2B9BE55B7 /* Pods-PartyPace.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PartyPace.release.xcconfig"; path = "Target Support Files/Pods-PartyPace/Pods-PartyPace.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,17 +47,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7F07FEAC634509A9288BB1F /* Pods_PartyPace.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		417CFF771F8D1E5D850A1C30 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3A630C538408D9D823BC97C6 /* Pods-PartyPace.debug.xcconfig */,
+				92815B08FAB1E9B2B9BE55B7 /* Pods-PartyPace.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		49903C44267C6AE500814BA6 = {
 			isa = PBXGroup;
 			children = (
 				49903C4F267C6AE600814BA6 /* PartyPace */,
 				49903C4E267C6AE600814BA6 /* Products */,
+				417CFF771F8D1E5D850A1C30 /* Pods */,
+				74BFBE41A2434B453D96DCA5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,7 +89,6 @@
 				49903C50267C6AE600814BA6 /* AppDelegate.swift */,
 				49903C52267C6AE600814BA6 /* SceneDelegate.swift */,
 				49903C56267C6AE600814BA6 /* Main.storyboard */,
-				49903C69267D8FFD00814BA6 /* CollectionViewCell.swift */,
 				49903C59267C6AE700814BA6 /* Assets.xcassets */,
 				49903C5B267C6AE700814BA6 /* LaunchScreen.storyboard */,
 				49903C5E267C6AE700814BA6 /* Info.plist */,
@@ -84,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				49903C64267C6B6B00814BA6 /* Person.swift */,
+				49F1884A268EEA4E008BAAEA /* JSON.swift */,
 				49903C6D267DBA4C00814BA6 /* Ride.swift */,
 			);
 			path = Models;
@@ -94,8 +112,17 @@
 			children = (
 				49903C54267C6AE600814BA6 /* RideCreationViewController.swift */,
 				49FDFD2D267FF08100535301 /* MapViewController.swift */,
+				4951B60E2689662300ADD5AA /* RideViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		74BFBE41A2434B453D96DCA5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				437F9E8FFDBF5F801D06BCA2 /* Pods_PartyPace.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -105,9 +132,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 49903C61267C6AE700814BA6 /* Build configuration list for PBXNativeTarget "PartyPace" */;
 			buildPhases = (
+				91712831ED034FBC663CED60 /* [CP] Check Pods Manifest.lock */,
 				49903C49267C6AE500814BA6 /* Sources */,
 				49903C4A267C6AE500814BA6 /* Frameworks */,
 				49903C4B267C6AE500814BA6 /* Resources */,
+				931A23FD34DB2C0A6AB0CA1D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -163,18 +192,61 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		91712831ED034FBC663CED60 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PartyPace-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		931A23FD34DB2C0A6AB0CA1D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PartyPace/Pods-PartyPace-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PartyPace/Pods-PartyPace-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PartyPace/Pods-PartyPace-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		49903C49267C6AE500814BA6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49903C6A267D8FFD00814BA6 /* CollectionViewCell.swift in Sources */,
 				49903C55267C6AE600814BA6 /* RideCreationViewController.swift in Sources */,
 				49903C51267C6AE600814BA6 /* AppDelegate.swift in Sources */,
 				49903C6C267DB5EC00814BA6 /* RideOrganizationViewController.swift in Sources */,
+				49F1884B268EEA4E008BAAEA /* JSON.swift in Sources */,
 				49903C65267C6B6B00814BA6 /* Person.swift in Sources */,
 				49903C53267C6AE600814BA6 /* SceneDelegate.swift in Sources */,
 				49903C6E267DBA4C00814BA6 /* Ride.swift in Sources */,
+				4951B60F2689662300ADD5AA /* RideViewController.swift in Sources */,
 				49FDFD2E267FF08100535301 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -319,6 +391,7 @@
 		};
 		49903C62267C6AE700814BA6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3A630C538408D9D823BC97C6 /* Pods-PartyPace.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -338,6 +411,7 @@
 		};
 		49903C63267C6AE700814BA6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 92815B08FAB1E9B2B9BE55B7 /* Pods-PartyPace.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
