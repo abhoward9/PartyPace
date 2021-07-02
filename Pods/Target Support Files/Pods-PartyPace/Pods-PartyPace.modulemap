@@ -1,0 +1,6 @@
+framework module Pods_PartyPace {
+  umbrella header "Pods-PartyPace-umbrella.h"
+
+  export *
+  module * { export * }
+}
