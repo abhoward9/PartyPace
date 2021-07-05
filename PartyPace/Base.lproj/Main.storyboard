@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PLn-Zf-tFm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uD2-ba-ySg">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
@@ -40,7 +40,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="nk6-dd-daa">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="nk6-dd-daa" customClass="MiniMap" customModule="PartyPace" customModuleProvider="target">
                                 <rect key="frame" x="75" y="230" width="240" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <gestureRecognizers/>
@@ -99,7 +99,7 @@
                         <outlet property="paceLabel" destination="LQw-nd-LuN" id="0l5-4P-mpm"/>
                         <outlet property="pacePicker" destination="0Kr-s3-BXt" id="uNV-Sh-vKq"/>
                         <outlet property="privacyPicker" destination="Yor-1A-Gr9" id="rDY-6i-4oI"/>
-                        <outlet property="rideMap" destination="nk6-dd-daa" id="RUN-Rh-DRS"/>
+                        <outlet property="rideMap" destination="nk6-dd-daa" id="u7J-uZ-ha4"/>
                         <outlet property="rideTitleField" destination="ngb-bl-NHf" id="mWd-59-CKQ"/>
                         <outlet property="tireSizeLabel" destination="Ssr-f5-Cax" id="45J-YN-vAn"/>
                         <outlet property="tireSizePicker" destination="Xsu-HF-hWU" id="hgp-qR-Lpi"/>
@@ -220,13 +220,42 @@
                     <view key="view" contentMode="scaleToFill" id="XM1-hG-Zos">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="B6b-k4-nwD">
+                                <rect key="frame" x="0.0" y="192" width="414" height="670"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="muZ-bf-Dj1">
+                                <rect key="frame" x="202" y="97" width="87" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="loadLine:" destination="PLn-Zf-tFm" eventType="touchUpInside" id="aMd-WY-s0s"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zgg-uT-SAv">
+                                <rect key="frame" x="20" y="97" width="97" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="z2u-Uc-XqO"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="B6b-k4-nwD" firstAttribute="top" secondItem="z2u-Uc-XqO" secondAttribute="top" id="9bH-qh-6Rm"/>
+                            <constraint firstItem="B6b-k4-nwD" firstAttribute="leading" secondItem="z2u-Uc-XqO" secondAttribute="leading" id="EVS-yi-PLx"/>
+                            <constraint firstItem="z2u-Uc-XqO" firstAttribute="trailing" secondItem="B6b-k4-nwD" secondAttribute="trailing" id="afL-yr-R3o"/>
+                            <constraint firstItem="z2u-Uc-XqO" firstAttribute="bottom" secondItem="B6b-k4-nwD" secondAttribute="bottom" id="iuF-bc-8Xe"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="URLfield" destination="zgg-uT-SAv" id="QWH-uV-aAp"/>
+                        <outlet property="mapView" destination="B6b-k4-nwD" id="eOh-vp-65C"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZOt-Og-dmK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-301" y="635"/>
+            <point key="canvasLocation" x="-301.44927536231887" y="634.82142857142856"/>
         </scene>
         <!--Organize-->
         <scene sceneID="75O-i4-pvT">

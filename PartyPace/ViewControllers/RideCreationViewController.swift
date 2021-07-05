@@ -42,7 +42,7 @@ class RideCreationViewController: UIViewController {
     @IBOutlet weak var rideTitleField: UITextField!
     @IBOutlet weak var tireSizeLabel: UILabel!
     @IBOutlet weak var paceLabel: UILabel!
-    @IBOutlet weak var rideMap: MKMapView!
+    @IBOutlet weak var rideMap: MiniMap!
     
     @IBAction func CreateRideButtonPressed(_ sender: Any) {
         
@@ -72,6 +72,10 @@ class RideCreationViewController: UIViewController {
         tireSizePicker.delegate = self
         privacyPicker.dataSource = self
         privacyPicker.delegate = self
+        rideMap.delegate = rideMap
+        rideMap.loadRoute()
+        
+        
         
 
         
