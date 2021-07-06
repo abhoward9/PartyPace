@@ -34,7 +34,7 @@ struct Route: Codable {
 //    let createdAt, updatedAt: Date
 //    let name, routeDescription: String
 //    let firstLng, firstLat, lastLat, lastLng: Double
-    let boundingBox: [BoundingBox]
+//    let boundingBox: [BoundingBox]
 //    let locality, postalCode, administrativeArea, countryCode: String
 //    let privacyCode: JSONNull?
 //    let user: User
@@ -67,7 +67,7 @@ struct Route: Codable {
 //        case firstLat = "first_lat"
 //        case lastLat = "last_lat"
 //        case lastLng = "last_lng"
-        case boundingBox = "bounding_box"
+//        case boundingBox = "bounding_box"
 //        case locality
 //        case postalCode = "postal_code"
 //        case administrativeArea = "administrative_area"

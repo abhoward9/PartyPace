@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>953216190282-lned07h23bqju50quun957bt3bld9gk7.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.953216190282-lned07h23bqju50quun957bt3bld9gk7</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBopKFDR3TI6caQt_jw4bos0Gx7ClI7t-Q</string>
+	<key>GCM_SENDER_ID</key>
+	<string>953216190282</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.FerdaSoft.PartyPace</string>
+	<key>PROJECT_ID</key>
+	<string>partypace-4a215</string>
+	<key>STORAGE_BUCKET</key>
+	<string>partypace-4a215.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:953216190282:ios:79861f6de8f52adc45a3b3</string>
+</dict>
+</plist>

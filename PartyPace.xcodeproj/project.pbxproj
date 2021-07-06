@@ -18,6 +18,7 @@
 		49903C6C267DB5EC00814BA6 /* RideOrganizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49903C6B267DB5EC00814BA6 /* RideOrganizationViewController.swift */; };
 		49903C6E267DBA4C00814BA6 /* Ride.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49903C6D267DBA4C00814BA6 /* Ride.swift */; };
 		49B2AB17269396D4002FBAF3 /* miniMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B2AB16269396D4002FBAF3 /* miniMap.swift */; };
+		49B2AB192693A5FC002FBAF3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49B2AB182693A5FC002FBAF3 /* GoogleService-Info.plist */; };
 		49F1884B268EEA4E008BAAEA /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F1884A268EEA4E008BAAEA /* JSON.swift */; };
 		49FDFD2E267FF08100535301 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FDFD2D267FF08100535301 /* MapViewController.swift */; };
 		B7F07FEAC634509A9288BB1F /* Pods_PartyPace.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 437F9E8FFDBF5F801D06BCA2 /* Pods_PartyPace.framework */; };
@@ -39,6 +40,7 @@
 		49903C6B267DB5EC00814BA6 /* RideOrganizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideOrganizationViewController.swift; sourceTree = "<group>"; };
 		49903C6D267DBA4C00814BA6 /* Ride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ride.swift; sourceTree = "<group>"; };
 		49B2AB16269396D4002FBAF3 /* miniMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = miniMap.swift; sourceTree = "<group>"; };
+		49B2AB182693A5FC002FBAF3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		49F1884A268EEA4E008BAAEA /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		49FDFD2D267FF08100535301 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		92815B08FAB1E9B2B9BE55B7 /* Pods-PartyPace.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PartyPace.release.xcconfig"; path = "Target Support Files/Pods-PartyPace/Pods-PartyPace.release.xcconfig"; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				49903C59267C6AE700814BA6 /* Assets.xcassets */,
 				49903C5B267C6AE700814BA6 /* LaunchScreen.storyboard */,
 				49903C5E267C6AE700814BA6 /* Info.plist */,
+				49B2AB182693A5FC002FBAF3 /* GoogleService-Info.plist */,
 				49903C6B267DB5EC00814BA6 /* RideOrganizationViewController.swift */,
 			);
 			path = PartyPace;
@@ -188,6 +191,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				49903C5D267C6AE700814BA6 /* LaunchScreen.storyboard in Resources */,
+				49B2AB192693A5FC002FBAF3 /* GoogleService-Info.plist in Resources */,
 				49903C5A267C6AE700814BA6 /* Assets.xcassets in Resources */,
 				49903C58267C6AE600814BA6 /* Main.storyboard in Resources */,
 			);

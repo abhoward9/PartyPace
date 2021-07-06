@@ -8,6 +8,8 @@
 import UIKit
 import CoreLocation
 import MapKit
+import FirebaseDatabase
+import FirebaseFirestore
 
 enum tireChoices: String, CaseIterable {
     case road
@@ -31,6 +33,8 @@ enum privacyChoices: String, CaseIterable {
 
 
 class RideCreationViewController: UIViewController {
+    var ref: DatabaseReference!
+
     
     var rideDate: Date?
     var rideStartLocation, meetupLocation: CLLocationCoordinate2D?
@@ -60,7 +64,7 @@ class RideCreationViewController: UIViewController {
     
     override func viewDidLoad() {
         
-        
+        let db = Firestore.firestore()
         
         super.viewDidLoad()
         
@@ -75,8 +79,32 @@ class RideCreationViewController: UIViewController {
         rideMap.delegate = rideMap
         rideMap.loadRoute()
         
+        ref = Database.database().reference()
+       
+        let date = Date()
         
+//        db.collection("cities").document("LA").setData([
+//            "name": "Los Angeles",
+//            "state": "CA",
+//            "country": "USA"
+//        ]) { err in
+//            if let err = err {
+//                print("Error writing document: \(err)")
+//            } else {
+//                print("Document successfully written!")
+//            }
+//        }
         
+        let newride = Ride(rideName: "hello", time: Date(), paceSetting: .cat1, tireRecommendation: .over32, privacySetting: .groupRide)
+        
+        db.collection("Routes").document("1").setData([ "ride1": "\(newride.name)"
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
 
         
     }
