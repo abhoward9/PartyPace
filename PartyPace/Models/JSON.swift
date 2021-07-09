@@ -292,9 +292,17 @@ struct Segment: Codable {
 
 // MARK: - TrackPoint
 struct TrackPoint: Codable {
-    let d, e, x, y: Double
+    let e, x, y: Double
     let color, options: Int?
-}
+    
+    enum CodingKeys: String, CodingKey {
+//        case d
+        case e
+        case x
+        case y
+        case color, options
+    }
+ }
 
 // MARK: - User
 struct User: Codable {
