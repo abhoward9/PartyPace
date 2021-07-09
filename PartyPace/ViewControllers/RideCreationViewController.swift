@@ -47,12 +47,23 @@ class RideCreationViewController: UIViewController {
     @IBOutlet weak var tireSizeLabel: UILabel!
     @IBOutlet weak var paceLabel: UILabel!
     @IBOutlet weak var rideMap: MiniMap!
-    
+    let db = Firestore.firestore()
+    var counter = 0
+
     @IBAction func CreateRideButtonPressed(_ sender: Any) {
         
+        counter += 1
+
+        let newride = Ride(rideName: "hello", time: Date(), paceSetting: .cat1, tireRecommendation: .over32, privacySetting: .groupRide)
         
-//        Ride(rideName: rideTitleField.text, time: rideDate ?? nil, ridePace: pacePicker, tireRecommendation: <#T##tireChoices#>)
-        
+        db.collection("Routes").document("\(counter)").setData([ "ride1": "\(newride.StartTime)"
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
     }
     
     @IBOutlet weak var pacePicker: UIPickerView!
@@ -64,7 +75,6 @@ class RideCreationViewController: UIViewController {
     
     override func viewDidLoad() {
         
-        let db = Firestore.firestore()
         
         super.viewDidLoad()
         
@@ -95,16 +105,7 @@ class RideCreationViewController: UIViewController {
 //            }
 //        }
         
-        let newride = Ride(rideName: "hello", time: Date(), paceSetting: .cat1, tireRecommendation: .over32, privacySetting: .groupRide)
-        
-        db.collection("Routes").document("1").setData([ "ride1": "\(newride.name)"
-        ]) { err in
-            if let err = err {
-                print("Error writing document: \(err)")
-            } else {
-                print("Document successfully written!")
-            }
-        }
+
 
         
     }
