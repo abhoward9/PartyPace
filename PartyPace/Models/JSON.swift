@@ -15,10 +15,10 @@ import Foundation
 import Foundation
 
 // MARK: - Welcome
-struct Welcome: Codable {
-    let type: String
-    let route: Route
-}
+//struct Welcome: Codable {
+//    let type: String
+//    let route: Route
+//}
 
 // MARK: - Route
 struct Route: Codable {
@@ -574,3 +574,118 @@ class JSONAny: Codable {
         }
     }
 }
+
+
+// This file was generated from JSON Schema using quicktype, do not modify it directly.
+// To parse the JSON, add this file to your project and do:
+//
+//   let welcome = try? newJSONDecoder().decode(Welcome.self, from: jsonData)
+
+
+
+struct UserRoute: Codable {
+    let id: Int
+//    let createdAt: Date
+//    let name: String
+//    let distance, elevationGain, elevationLoss: Double
+//    let locality: String?
+//    let visibility: Int
+//    let administrativeArea: AdministrativeArea?
+//    let tagNames: [JSONAny]
+
+    enum CodingKeys: String, CodingKey {
+        case id
+//        case createdAt = "created_at"
+//        case name, distance
+//        case elevationGain = "elevation_gain"
+//        case elevationLoss = "elevation_loss"
+//        case locality, visibility
+//        case administrativeArea = "administrative_area"
+//        case tagNames = "tag_names"
+    }
+}
+
+enum AdministrativeArea: String, Codable {
+    case hi = "HI"
+    case or = "OR"
+    case wa = "WA"
+}
+
+typealias UserRoutes = [UserRoute]
+
+// MARK: - Encode/decode helpers
+
+
+
+
+// MARK: - Welcome
+//struct Welcome: Codable {
+//    let results: [Result]
+//    let resultsCount: Int
+//
+//    enum CodingKeys: String, CodingKey {
+//        case results
+//        case resultsCount = "results_count"
+//    }
+//}
+//
+//// MARK: - Result
+//struct Result: Codable {
+//    let id, groupMembershipID: Int
+//    let name, resultDescription: String
+//    let createdAt: Date
+//    let distance, elevationGain, elevationLoss: Double
+//    let visibility: Int
+//    let firstLat, firstLng, lastLat, lastLng: Double
+//    let isTrip: Bool
+//    let postalCode, locality, administrativeArea: String
+//    let pavementTypeID: JSONNull?
+//    let countryCode: String
+//    let hasCoursePoints: Bool
+//    let updatedAt: Date
+//    let bestForID, plannerOptions: JSONNull?
+//    let userID: Int
+//    let deletedAt: JSONNull?
+//    let swLng, swLat, neLng, neLat: Double
+//    let trackID: String
+//    let archivedAt: JSONNull?
+//    let likesCount, highlightedPhotoID: Int
+//    let highlightedPhotoChecksum: JSONNull?
+//
+//    enum CodingKeys: String, CodingKey {
+//        case id
+//        case groupMembershipID = "group_membership_id"
+//        case name
+//        case resultDescription = "description"
+//        case createdAt = "created_at"
+//        case distance
+//        case elevationGain = "elevation_gain"
+//        case elevationLoss = "elevation_loss"
+//        case visibility
+//        case firstLat = "first_lat"
+//        case firstLng = "first_lng"
+//        case lastLat = "last_lat"
+//        case lastLng = "last_lng"
+//        case isTrip = "is_trip"
+//        case postalCode = "postal_code"
+//        case locality
+//        case administrativeArea = "administrative_area"
+//        case pavementTypeID = "pavement_type_id"
+//        case countryCode = "country_code"
+//        case hasCoursePoints = "has_course_points"
+//        case updatedAt = "updated_at"
+//        case bestForID = "best_for_id"
+//        case plannerOptions = "planner_options"
+//        case userID = "user_id"
+//        case deletedAt = "deleted_at"
+//        case swLng = "sw_lng"
+//        case swLat = "sw_lat"
+//        case neLng = "ne_lng"
+//        case neLat = "ne_lat"
+//        case trackID = "track_id"
+//        case archivedAt = "archived_at"
+//        case likesCount = "likes_count"
+//        case highlightedPhotoID = "highlighted_photo_id"
+//        case highlightedPhotoChecksum = "highlighted_photo_checksum"
+//    }
+//}

@@ -18,7 +18,7 @@ class RideViewController: UIViewController {
     @IBAction func loadLine(_ sender: Any) {
 //        print(mapPoints)
 //        let url = URL(string: URLfield.text!)
-        let url = URL(string: "https://ridewithgps.com/routes/36389955.json")
+        let url = URL(string: "https://ridewithgps.com/users/518136/routes.json")
         guard let requestUrl = url else { fatalError() }
 
         // Create URL Request
@@ -33,6 +33,8 @@ class RideViewController: UIViewController {
         request.addValue("apikey", forHTTPHeaderField: "674d66d1")
         request.addValue("version", forHTTPHeaderField: "2")
         request.addValue("auth_token", forHTTPHeaderField: "b3a08a5799f1810825666a6e84913e18")
+        request.addValue("offset", forHTTPHeaderField: "0")
+        request.addValue("limit", forHTTPHeaderField: "2")
 
         // Send HTTP Request
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
@@ -55,19 +57,22 @@ class RideViewController: UIViewController {
                 if let jsonData = dataString.data(using: .utf8) {
 
                     do {
-                        let route = try decoder.decode(Route.self, from: jsonData)
+//                        print(dataString)
+//                        let route = try decoder.decode(Route.self, from: jsonData)
+//                        let route = try decoder.decode(UserRoutes.self, from: jsonData)
+                        let welcome = try decoder.decode([UserRoute].self, from: jsonData)
                         
-                        print(route.id)
+                        print(welcome[0].id)
                         
-                        for point in route.trackPoints {
-//                            print(point)
-                            let routePoint = GPXRoutePoint(latitude: point.y, longitude: point.x)
-                            self.gpxRoute.points.append(routePoint)
-//                            print(routePoint.latitude, routePoint.longitude)
-                            self.mapPoints.append(CLLocationCoordinate2D(latitude: routePoint.latitude!, longitude: routePoint.longitude!))
-
-
-                        }
+//                        for point in route.trackPoints {
+////                            print(point)
+//                            let routePoint = GPXRoutePoint(latitude: point.y, longitude: point.x)
+//                            self.gpxRoute.points.append(routePoint)
+////                            print(routePoint.latitude, routePoint.longitude)
+//                            self.mapPoints.append(CLLocationCoordinate2D(latitude: routePoint.latitude!, longitude: routePoint.longitude!))
+//
+//
+//                        }
                         DispatchQueue.main.async {
                             
                         
