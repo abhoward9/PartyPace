@@ -16,21 +16,19 @@ class MiniMap: MKMapView {
  
     func loadRoute() {
         
-                let url = URL(string: "https://ridewithgps.com/routes/141014.json")
+                let url = URL(string: "https://ridewithgps.com/users/current.json")
                 guard let requestUrl = url else { fatalError() }
 
                 // Create URL Request
                 var request = URLRequest(url: requestUrl)
-        //        let queryItem1 = URLQueryItem(name: "apikey", value: "testkey1")
-        //        let queryItem2 = URLQueryItem(name: "version", value: "2")
-        //        let queryItem3 = URLQueryItem(name: "auth_token", value: "942927bd9e0b862a129ce34bb7824b6f")
-                
-        //        let queryItems = [queryItem1, queryItem2, queryItem3]
+        
                 // Specify HTTP Method to use
                 request.httpMethod = "GET"
-                request.addValue("apikey", forHTTPHeaderField: "testkey1")
+                request.addValue("apikey", forHTTPHeaderField: "674d66d1")
                 request.addValue("version", forHTTPHeaderField: "2")
-                request.addValue("auth_token", forHTTPHeaderField: "942927bd9e0b862a129ce34bb7824b6f")
+//                request.addValue("auth_token", forHTTPHeaderField: "942927bd9e0b862a129ce34bb7824b6f")
+                request.addValue("email", forHTTPHeaderField: "abhoward9@icloud.com")
+                request.addValue("password", forHTTPHeaderField: "3EWYzfbYmLY8oD")
 
                 // Send HTTP Request
                 let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
@@ -51,7 +49,7 @@ class MiniMap: MKMapView {
                         let decoder = JSONDecoder()
           
                         if let jsonData = dataString.data(using: .utf8) {
-
+                            print(dataString)
                             do {
                                 let route = try decoder.decode(Route.self, from: jsonData)
                                 

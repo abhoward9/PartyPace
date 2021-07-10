@@ -23,11 +23,7 @@ class RideViewController: UIViewController {
 
         // Create URL Request
         var request = URLRequest(url: requestUrl)
-//        let queryItem1 = URLQueryItem(name: "apikey", value: "testkey1")
-//        let queryItem2 = URLQueryItem(name: "version", value: "2")
-//        let queryItem3 = URLQueryItem(name: "auth_token", value: "942927bd9e0b862a129ce34bb7824b6f")
-        
-//        let queryItems = [queryItem1, queryItem2, queryItem3]
+
         // Specify HTTP Method to use
         request.httpMethod = "GET"
         request.addValue("apikey", forHTTPHeaderField: "674d66d1")

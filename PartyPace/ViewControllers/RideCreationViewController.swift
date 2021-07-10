@@ -11,28 +11,22 @@ import MapKit
 import FirebaseDatabase
 import FirebaseFirestore
 
-enum tireChoices: String, CaseIterable {
-    case road
-    case over32
-    case over40
-    case over48
-    
-}
-
-enum paceChoices: String, CaseIterable {
-    case party, noDrop, cat5, cat4, cat3, cat2, cat1
-}
-
-enum privacyChoices: String, CaseIterable {
-    case publicRide
-    case privateRide
-    case groupRide
-    case mutualFriends
-    case friendsOfFriends
-}
 
 
 class RideCreationViewController: UIViewController {
+    
+    //MARK: IBOutlets and Actions
+    @IBOutlet weak var rideTitleField: UITextField!
+    @IBOutlet weak var tireSizeLabel: UILabel!
+    @IBOutlet weak var paceLabel: UILabel!
+    @IBOutlet weak var rideMap: MiniMap!
+    
+    @IBOutlet weak var pacePicker: UIPickerView!
+    
+    @IBOutlet weak var tireSizePicker: UIPickerView!
+    @IBOutlet weak var privacyPicker: UIPickerView!
+    
+    
     var ref: DatabaseReference!
 
     
@@ -43,10 +37,7 @@ class RideCreationViewController: UIViewController {
     var recommendedTireSize: tireChoices?
     var privacySetting: privacyChoices?
     
-    @IBOutlet weak var rideTitleField: UITextField!
-    @IBOutlet weak var tireSizeLabel: UILabel!
-    @IBOutlet weak var paceLabel: UILabel!
-    @IBOutlet weak var rideMap: MiniMap!
+
     let db = Firestore.firestore()
     var counter = 0
 
@@ -54,7 +45,7 @@ class RideCreationViewController: UIViewController {
         
         counter += 1
 
-        let newride = Ride(rideName: "hello", time: Date(), paceSetting: .cat1, tireRecommendation: .over32, privacySetting: .groupRide)
+        let newride = RideWithUserPreferences(rideName: "hello", time: Date(), paceSetting: .cat1, tireRecommendation: .over32, privacySetting: .groupRide)
         
         db.collection("Routes").document("\(counter)").setData([ "ride1": "\(newride.StartTime)"
         ]) { err in
@@ -66,10 +57,7 @@ class RideCreationViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var pacePicker: UIPickerView!
     
-    @IBOutlet weak var tireSizePicker: UIPickerView!
-    @IBOutlet weak var privacyPicker: UIPickerView!
     
 
     
@@ -93,31 +81,18 @@ class RideCreationViewController: UIViewController {
        
         let date = Date()
         
-//        db.collection("cities").document("LA").setData([
-//            "name": "Los Angeles",
-//            "state": "CA",
-//            "country": "USA"
-//        ]) { err in
-//            if let err = err {
-//                print("Error writing document: \(err)")
-//            } else {
-//                print("Document successfully written!")
-//            }
-//        }
-        
+
 
 
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        let location = sender.location(in: self.fullMapView)
-//        let locCoord = self.fullMapView.convert(location, toCoordinateFrom: self.fullMapView)
+
         super.viewWillAppear(true)
         
         if let pointLocation = rideStartLocation {
             let placemark = MKPlacemark(coordinate: pointLocation)
-    //        let annotation = MKPointAnnotation()
             
             rideMap.removeAnnotations(rideMap.annotations)
             rideMap.addAnnotation(placemark)

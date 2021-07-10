@@ -8,7 +8,7 @@
 import Foundation
 
 
-class Ride {
+class RideWithUserPreferences {
     var name: String?
     var StartTime: Date?
     var ridePrivacy: privacyChoices?
