@@ -304,36 +304,53 @@ struct TrackPoint: Codable {
     }
  }
 
-// MARK: - User
-struct User: Codable {
+
+// MARK: - Encode/decode helpers
+
+
+
+
+// This file was generated from JSON Schema using quicktype, do not modify it directly.
+// To parse the JSON, add this file to your project and do:
+//
+//   let welcome = try? newJSONDecoder().decode(Welcome.self, from: jsonData)
+
+
+
+struct UserRoute: Codable {
     let id: Int
-    let createdAt: Date
-    let userDescription, interests, locality, administrativeArea: String
-    let accountLevel: Int
-    let totalTripDistance: Double
-    let totalTripDuration: Int
-    let totalTripElevationGain: Double
-    let name: String
-    let highlightedPhotoID: Int
-    let highlightedPhotoChecksum: String
+//    let createdAt: Date
+//    let name: String
+//    let distance, elevationGain, elevationLoss: Double
+//    let locality: String?
+//    let visibility: Int
+//    let administrativeArea: AdministrativeArea?
+//    let tagNames: [JSONAny]
 
     enum CodingKeys: String, CodingKey {
         case id
-        case createdAt = "created_at"
-        case userDescription = "description"
-        case interests, locality
-        case administrativeArea = "administrative_area"
-        case accountLevel = "account_level"
-        case totalTripDistance = "total_trip_distance"
-        case totalTripDuration = "total_trip_duration"
-        case totalTripElevationGain = "total_trip_elevation_gain"
-        case name
-        case highlightedPhotoID = "highlighted_photo_id"
-        case highlightedPhotoChecksum = "highlighted_photo_checksum"
+//        case createdAt = "created_at"
+//        case name, distance
+//        case elevationGain = "elevation_gain"
+//        case elevationLoss = "elevation_loss"
+//        case locality, visibility
+//        case administrativeArea = "administrative_area"
+//        case tagNames = "tag_names"
     }
 }
 
-// MARK: - Encode/decode helpers
+enum AdministrativeArea: String, Codable {
+    case hi = "HI"
+    case or = "OR"
+    case wa = "WA"
+}
+
+typealias UserRoutes = [UserRoute]
+
+
+
+
+
 
 class JSONNull: Codable, Hashable {
 
@@ -575,40 +592,222 @@ class JSONAny: Codable {
     }
 }
 
+// MARK: - User
+struct CurrentUser: Codable {
+//    let id: Int
+    
+    let user: User
+//    let labs: [String: Bool]
+//    let additionalDrawerItems: [JSONAny]
 
-// This file was generated from JSON Schema using quicktype, do not modify it directly.
-// To parse the JSON, add this file to your project and do:
-//
-//   let welcome = try? newJSONDecoder().decode(Welcome.self, from: jsonData)
-
-
-
-struct UserRoute: Codable {
-    let id: Int
 //    let createdAt: Date
+//    let userDescription, interests, locality, administrativeArea: String
+//    let accountLevel: Int
+//    let totalTripDistance: Double
+//    let totalTripDuration: Int
+//    let totalTripElevationGain: Double
 //    let name: String
-//    let distance, elevationGain, elevationLoss: Double
-//    let locality: String?
-//    let visibility: Int
-//    let administrativeArea: AdministrativeArea?
-//    let tagNames: [JSONAny]
+//    let highlightedPhotoID: Int
+//    let highlightedPhotoChecksum: String
 
     enum CodingKeys: String, CodingKey {
-        case id
+//        case id
+        case user
+//        case labs
+//        case additionalDrawerItems = "additional_drawer_items"
 //        case createdAt = "created_at"
-//        case name, distance
-//        case elevationGain = "elevation_gain"
-//        case elevationLoss = "elevation_loss"
-//        case locality, visibility
+//        case userDescription = "description"
+//        case interests, locality
 //        case administrativeArea = "administrative_area"
-//        case tagNames = "tag_names"
+//        case accountLevel = "account_level"
+//        case totalTripDistance = "total_trip_distance"
+//        case totalTripDuration = "total_trip_duration"
+//        case totalTripElevationGain = "total_trip_elevation_gain"
+//        case name
+//        case highlightedPhotoID = "highlighted_photo_id"
+//        case highlightedPhotoChecksum = "highlighted_photo_checksum"
     }
 }
 
-enum AdministrativeArea: String, Codable {
-    case hi = "HI"
-    case or = "OR"
-    case wa = "WA"
+
+// MARK: - UserClass
+struct User: Codable {
+    let id: Int
+//    let firstName, lastName, email: String
+//    let createdAt: Date
+//    let selfMembershipID: Int
+//    let userDescription, interests: JSONNull?
+//    let emailVisible: Bool
+//    let lastLoginAt: Date
+//    let totalRouteDistance: Int
+//    let metricUnits: Bool
+//    let hrMax, hrREST, hrZone1_Low, hrZone1_High: JSONNull?
+//    let hrZone2_Low, hrZone2_High, hrZone3_Low, hrZone3_High: JSONNull?
+//    let hrZone4_Low, hrZone4_High, hrZone5_Low, hrZone5_High: JSONNull?
+//    let isMale: Bool
+//    let weight, vo2Max: JSONNull?
+//    let numUnreadMessages: Int
+//    let lat, lng: Double
+//    let displayName, locality, administrativeArea, postalCode: String
+//    let countryCode: String
+//    let emailOnMessage, emailOnComment, emailOnUpdate: Bool
+//    let visibility: Int
+//    let timeZone: String
+//    let facebookID: JSONNull?
+//    let accountLevel, weeksStartOn, emailBounceCount, tripsIncludedInTotalsCount: Int
+//    let siteID: Int
+//    let dob: JSONNull?
+//    let deactivated: Int
+//    let updatedAt: Date
+//    let deactivatedAt: JSONNull?
+//    let locale: String
+//    let heatmapOptout, emailOnFollow, emailOnGoal: Bool
+//    let name: String
+//    let age: JSONNull?
+//    let privileges: [String]
+//    let highlightedPhotoID: Int
+//    let preferences: Preferences
+//    let gear: [JSONAny]
+//    let unseenUpdates: [UnseenUpdate]
+//    let pushApplications, relevantGoalParticipants, relevantChallengeParticipants: [JSONAny]
+//    let hasChallengeParticipants: Bool
+//    let clubIDS: [JSONAny]
+//    let slimFavorites: [SlimFavorite]
+//    let hasEvents, needsPasswordReset, eligibleForOnetimeTrial, isShadowUser: Bool
+    let authToken: String
+//    let userSummary: [String: [Double]]
+
+    enum CodingKeys: String, CodingKey {
+        case id
+//        case firstName = "first_name"
+//        case lastName = "last_name"
+//        case email
+//        case createdAt = "created_at"
+//        case selfMembershipID = "self_membership_id"
+//        case userDescription = "description"
+//        case interests
+//        case emailVisible = "email_visible"
+//        case lastLoginAt = "last_login_at"
+//        case totalRouteDistance = "total_route_distance"
+//        case metricUnits = "metric_units"
+//        case hrMax = "hr_max"
+//        case hrREST = "hr_rest"
+//        case hrZone1_Low = "hr_zone_1_low"
+//        case hrZone1_High = "hr_zone_1_high"
+//        case hrZone2_Low = "hr_zone_2_low"
+//        case hrZone2_High = "hr_zone_2_high"
+//        case hrZone3_Low = "hr_zone_3_low"
+//        case hrZone3_High = "hr_zone_3_high"
+//        case hrZone4_Low = "hr_zone_4_low"
+//        case hrZone4_High = "hr_zone_4_high"
+//        case hrZone5_Low = "hr_zone_5_low"
+//        case hrZone5_High = "hr_zone_5_high"
+//        case isMale = "is_male"
+//        case weight
+//        case vo2Max = "vo2max"
+//        case numUnreadMessages = "num_unread_messages"
+//        case lat, lng
+//        case displayName = "display_name"
+//        case locality
+//        case administrativeArea = "administrative_area"
+//        case postalCode = "postal_code"
+//        case countryCode = "country_code"
+//        case emailOnMessage = "email_on_message"
+//        case emailOnComment = "email_on_comment"
+//        case emailOnUpdate = "email_on_update"
+//        case visibility
+//        case timeZone = "time_zone"
+//        case facebookID = "facebook_id"
+//        case accountLevel = "account_level"
+//        case weeksStartOn = "weeks_start_on"
+//        case emailBounceCount = "email_bounce_count"
+//        case tripsIncludedInTotalsCount = "trips_included_in_totals_count"
+//        case siteID = "site_id"
+//        case dob, deactivated
+//        case updatedAt = "updated_at"
+//        case deactivatedAt = "deactivated_at"
+//        case locale
+//        case heatmapOptout = "heatmap_optout"
+//        case emailOnFollow = "email_on_follow"
+//        case emailOnGoal = "email_on_goal"
+//        case name, age, privileges
+//        case highlightedPhotoID = "highlighted_photo_id"
+//        case preferences, gear
+//        case unseenUpdates = "unseen_updates"
+//        case pushApplications = "push_applications"
+//        case relevantGoalParticipants = "relevant_goal_participants"
+//        case relevantChallengeParticipants = "relevant_challenge_participants"
+//        case hasChallengeParticipants = "has_challenge_participants"
+//        case clubIDS = "club_ids"
+//        case slimFavorites = "slim_favorites"
+//        case hasEvents = "has_events"
+//        case needsPasswordReset = "needs_password_reset"
+//        case eligibleForOnetimeTrial = "eligible_for_onetime_trial"
+//        case isShadowUser = "is_shadow_user"
+        case authToken = "auth_token"
+//        case userSummary = "user_summary"
+    }
 }
 
-typealias UserRoutes = [UserRoute]
+// MARK: - Preferences
+struct Preferences: Codable {
+    let defaultPrivacyTrip, defaultPrivacyRoute: Int
+    let metricUnits: Bool
+    let routePlannerDirectionsType: String
+    let routePlannerRightSidebarClosed, receiveSegmentNotifications, showDashOnboardingOverlay, plannerOnboardingDismissed: Bool
+    let plannerOverlay: String
+    let showCoursepointIcons, routePlannerLeftSidebarClosed: Bool
+    let facebook: Facebook
+    let defaultCareerInterval, smartExportState, routeViewerActiveSubtab: String
+
+    enum CodingKeys: String, CodingKey {
+        case defaultPrivacyTrip = "default_privacy_trip"
+        case defaultPrivacyRoute = "default_privacy_route"
+        case metricUnits = "metric_units"
+        case routePlannerDirectionsType = "route_planner_directions_type"
+        case routePlannerRightSidebarClosed = "route_planner_right_sidebar_closed"
+        case receiveSegmentNotifications = "receive_segment_notifications"
+        case showDashOnboardingOverlay = "show_dash_onboarding_overlay"
+        case plannerOnboardingDismissed = "planner-onboarding-dismissed"
+        case plannerOverlay = "planner_overlay"
+        case showCoursepointIcons = "show_coursepoint_icons"
+        case routePlannerLeftSidebarClosed = "route_planner_left_sidebar_closed"
+        case facebook
+        case defaultCareerInterval = "default_career_interval"
+        case smartExportState = "smart_export_state"
+        case routeViewerActiveSubtab = "route_viewer_active_subtab"
+    }
+}
+
+// MARK: - Facebook
+struct Facebook: Codable {
+    let notifyOnActivity, notifyOnRoute: Bool
+
+    enum CodingKeys: String, CodingKey {
+        case notifyOnActivity = "notify_on_activity"
+        case notifyOnRoute = "notify_on_route"
+    }
+}
+
+// MARK: - SlimFavorite
+struct SlimFavorite: Codable {
+    let id: Int
+    let associatedObjectType: AssociatedObjectType
+    let associatedObjectID: Int
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case associatedObjectType = "associated_object_type"
+        case associatedObjectID = "associated_object_id"
+    }
+}
+
+enum AssociatedObjectType: String, Codable {
+    case route = "route"
+}
+
+// MARK: - UnseenUpdate
+struct UnseenUpdate: Codable {
+    let key: String
+    let count: Int
+}

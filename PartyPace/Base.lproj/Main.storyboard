@@ -94,7 +94,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Get Ride"/>
                                 <connections>
-                                    <action selector="GetRideButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jlu-Lp-eRO"/>
+                                    <action selector="GetRideButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kdF-Zx-kni"/>
                                 </connections>
                             </button>
                         </subviews>
