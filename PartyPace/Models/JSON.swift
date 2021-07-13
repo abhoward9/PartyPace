@@ -15,10 +15,10 @@ import Foundation
 import Foundation
 
 // MARK: - Welcome
-//struct Welcome: Codable {
-//    let type: String
-//    let route: Route
-//}
+struct Results: Codable {
+    let type: String
+    let route: Route
+}
 
 // MARK: - Route
 struct Route: Codable {
@@ -345,7 +345,7 @@ enum AdministrativeArea: String, Codable {
     case wa = "WA"
 }
 
-typealias UserRoutes = [UserRoute]
+//typealias UserRoutes = [UserRoute]
 
 
 
@@ -810,4 +810,78 @@ enum AssociatedObjectType: String, Codable {
 struct UnseenUpdate: Codable {
     let key: String
     let count: Int
+}
+
+
+struct UserRoutes: Codable {
+    let results: [Result]
+    let resultsCount: Int
+
+    enum CodingKeys: String, CodingKey {
+        case results
+        case resultsCount = "results_count"
+    }
+}
+
+// MARK: - Result
+struct Result: Codable {
+    let id: Int
+//    let groupMembershipID: Int
+//    let name, resultDescription: String
+//    let createdAt: Date
+//    let distance: Int
+//    let elevationGain, elevationLoss: Double
+//    let visibility: Int
+//    let firstLat, firstLng, lastLat, lastLng: Double
+//    let isTrip: Bool
+//    let postalCode, locality, administrativeArea: String
+//    let pavementTypeID: JSONNull?
+//    let countryCode: String
+//    let hasCoursePoints: Bool
+//    let updatedAt: Date
+//    let bestForID, plannerOptions: JSONNull?
+//    let userID: Int
+//    let deletedAt: JSONNull?
+//    let swLng, swLat, neLng, neLat: Double
+//    let trackID: String
+//    let archivedAt: JSONNull?
+//    let likesCount, highlightedPhotoID: Int
+//    let highlightedPhotoChecksum: JSONNull?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+//        case groupMembershipID
+//        case name
+//        case resultDescription
+//        case createdAt
+//        case distance
+//        case elevationGain
+//        case elevationLoss
+//        case visibility
+//        case firstLat
+//        case firstLng
+//        case lastLat
+//        case lastLng
+//        case isTrip
+//        case postalCode
+//        case locality
+//        case administrativeArea
+//        case pavementTypeID
+//        case countryCode
+//        case hasCoursePoints
+//        case updatedAt
+//        case bestForID
+//        case plannerOptions
+//        case userID
+//        case deletedAt
+//        case swLng
+//        case swLat
+//        case neLng
+//        case neLat
+//        case trackID
+//        case archivedAt
+//        case likesCount
+//        case highlightedPhotoID
+//        case highlightedPhotoChecksum
+    }
 }

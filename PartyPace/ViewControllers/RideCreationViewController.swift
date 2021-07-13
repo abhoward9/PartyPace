@@ -13,35 +13,6 @@ import FirebaseFirestore
 
 
 
-func baseURLString() -> String {
-//    let email = "abhoward9@icloud.com"
-//    let password = "3EWYzfbYmLY8oD"
-    return "https://ridewithgps.com/users/current.json"
-//    return "https://ridewithgps.com"
-}
-
-func authTokenURL() -> URLRequest? {
-    var url = URL(string: baseURLString())
-//    url?.appendPathComponent("/users/current.json")
-    guard let requestUrl = url else { fatalError() }
-
-    
-    // Create URL Request
-    var request = URLRequest(url: requestUrl)
-
-    // Specify HTTP Method to use
-    request.httpMethod = "GET"
-    request.addValue("email", forHTTPHeaderField: "abhoward9@icloud.com")
-    request.addValue("password", forHTTPHeaderField: "3EWYzfbYmLY8oD")
-//    request.httpMethod = "GET"
-
-    
-    print(request.allHTTPHeaderFields)
-    return request
-}
-
-
-
 class RideCreationViewController: UIViewController {
     var authToken: String!
     
@@ -104,7 +75,6 @@ class RideCreationViewController: UIViewController {
         super.viewDidLoad()
         
 //        let xtireSizePicker = TireSizePicker()
-        // Do any additional setup after loading the view.
         pacePicker.dataSource = self
         pacePicker.delegate = self
         tireSizePicker.dataSource = self
@@ -113,19 +83,16 @@ class RideCreationViewController: UIViewController {
         privacyPicker.delegate = self
         rideMap.delegate = rideMap
 //        rideMap.loadRoute()
-        
-//        ref = Database.database().reference()
        
 //        let date = Date()
-        //gets and sets authtoken for use in other requests
-        getAuthToken()
 
-        
+        displayLatestRoute()
 
 
 
         
     }
+
     
     override func viewWillAppear(_ animated: Bool) {
 
@@ -150,58 +117,11 @@ class RideCreationViewController: UIViewController {
         
     }
 
-    func getAuthToken() {
-//    let url = URL(string: baseURLString() + authTokenURL())
-    guard let requestUrl = authTokenURL() else { fatalError() }
-
-        print(requestUrl.allHTTPHeaderFields)
-    // Create URL Request
-//    var request = requestUrl
-
-    // Specify HTTP Method to use
-//    request.httpMethod = "GET"
-    
-    // Send HTTP Request
-    let task = URLSession.shared.dataTask(with: requestUrl) { (data, response, error) in
+    func displayLatestRoute() {
+        makeRWGPSRequest()
         
-        // Check if Error took place
-        if let error = error {
-            print("Error took place \(error)")
-            return
-        }
-        
-        // Read HTTP Response Status code
-        if let response = response as? HTTPURLResponse {
-            print("Response HTTP Status code: \(response.statusCode)")
-        }
-        
-        // Convert HTTP Response Data to a simple String
-        if let data = data, let dataString = String(data: data, encoding: .utf8) {
-            let decoder = JSONDecoder()
-            if let jsonData = dataString.data(using: .utf8) {
-
-                do {
-                    print(dataString)
-                    let currentUser = try decoder.decode(User.self, from: jsonData)
-//                    self.authToken = currentUser.authToken
-//                    print(self.authToken)
-                    print(currentUser.id)
-                    
-                    DispatchQueue.main.async {
-                        
-
-                    }
-
-                } catch {
-                    print(error)
-                }
-            }
-        
-        }
     }
 
-    task.resume()
-    }
 
 }
 
