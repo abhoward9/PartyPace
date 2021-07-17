@@ -82,13 +82,7 @@ class RideCreationViewController: UIViewController {
         privacyPicker.dataSource = self
         privacyPicker.delegate = self
         rideMap.delegate = rideMap
-//        rideMap.loadRoute()
-       
-//        let date = Date()
-
-        displayLatestRoute()
-
-
+        rideMap.loadRoute()
 
         
     }
@@ -117,10 +111,6 @@ class RideCreationViewController: UIViewController {
         
     }
 
-    func displayLatestRoute() {
-        makeRWGPSRequest()
-        
-    }
 
 
 }

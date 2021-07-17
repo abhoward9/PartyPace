@@ -20,9 +20,83 @@ struct Results: Codable {
     let route: Route
 }
 
+struct UserRoutes: Codable {
+    let results: [Result]
+    let resultsCount: Int
+
+    enum CodingKeys: String, CodingKey {
+        case results
+        case resultsCount = "results_count"
+    }
+}
+
+// MARK: - Result
+struct Result: Codable {
+    let id: Int
+//    let groupMembershipID: Int
+//    let name, resultDescription: String
+//    let createdAt: Date
+//    let distance: Int
+//    let elevationGain, elevationLoss: Double
+//    let visibility: Int
+//    let firstLat, firstLng, lastLat, lastLng: Double
+//    let isTrip: Bool
+//    let postalCode, locality, administrativeArea: String
+//    let pavementTypeID: JSONNull?
+//    let countryCode: String
+//    let hasCoursePoints: Bool
+//    let updatedAt: Date
+//    let bestForID, plannerOptions: JSONNull?
+//    let userID: Int
+//    let deletedAt: JSONNull?
+//    let swLng, swLat, neLng, neLat: Double
+//    let trackID: String
+//    let archivedAt: JSONNull?
+//    let likesCount, highlightedPhotoID: Int
+//    let highlightedPhotoChecksum: JSONNull?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+//        case groupMembershipID
+//        case name
+//        case resultDescription
+//        case createdAt
+//        case distance
+//        case elevationGain
+//        case elevationLoss
+//        case visibility
+//        case firstLat
+//        case firstLng
+//        case lastLat
+//        case lastLng
+//        case isTrip
+//        case postalCode
+//        case locality
+//        case administrativeArea
+//        case pavementTypeID
+//        case countryCode
+//        case hasCoursePoints
+//        case updatedAt
+//        case bestForID
+//        case plannerOptions
+//        case userID
+//        case deletedAt
+//        case swLng
+//        case swLat
+//        case neLng
+//        case neLat
+//        case trackID
+//        case archivedAt
+//        case likesCount
+//        case highlightedPhotoID
+//        case highlightedPhotoChecksum
+    }
+}
+
 // MARK: - Route
 struct Route: Codable {
-    let id, highlightedPhotoID: Int
+    let id: Int
+//    let highlightedPhotoID: Int
 //    let highlightedPhotoChecksum: String
 //    let distance, elevationGain, elevationLoss: Double
 //    let trackID: String
@@ -43,12 +117,12 @@ struct Route: Codable {
 //    let photos: [Photo]
 //    let segmentMatches: [SegmentMatch]
     let trackPoints: [TrackPoint]
-    let coursePoints: [CoursePoint]
+//    let coursePoints: [CoursePoint]
 //    let pointsOfInterest: [PointsOfInterest]
 
     enum CodingKeys: String, CodingKey {
         case id
-        case highlightedPhotoID = "highlighted_photo_id"
+//        case highlightedPhotoID = "highlighted_photo_id"
 //        case highlightedPhotoChecksum = "highlighted_photo_checksum"
 //        case distance
 //        case elevationGain = "elevation_gain"
@@ -79,7 +153,7 @@ struct Route: Codable {
 //        case rememberable, metrics, photos
 //        case segmentMatches = "segment_matches"
         case trackPoints = "track_points"
-        case coursePoints = "course_points"
+//        case coursePoints = "course_points"
 //        case pointsOfInterest = "points_of_interest"
     }
 }
@@ -813,75 +887,5 @@ struct UnseenUpdate: Codable {
 }
 
 
-struct UserRoutes: Codable {
-    let results: [Result]
-    let resultsCount: Int
 
-    enum CodingKeys: String, CodingKey {
-        case results
-        case resultsCount = "results_count"
-    }
-}
 
-// MARK: - Result
-struct Result: Codable {
-    let id: Int
-//    let groupMembershipID: Int
-//    let name, resultDescription: String
-//    let createdAt: Date
-//    let distance: Int
-//    let elevationGain, elevationLoss: Double
-//    let visibility: Int
-//    let firstLat, firstLng, lastLat, lastLng: Double
-//    let isTrip: Bool
-//    let postalCode, locality, administrativeArea: String
-//    let pavementTypeID: JSONNull?
-//    let countryCode: String
-//    let hasCoursePoints: Bool
-//    let updatedAt: Date
-//    let bestForID, plannerOptions: JSONNull?
-//    let userID: Int
-//    let deletedAt: JSONNull?
-//    let swLng, swLat, neLng, neLat: Double
-//    let trackID: String
-//    let archivedAt: JSONNull?
-//    let likesCount, highlightedPhotoID: Int
-//    let highlightedPhotoChecksum: JSONNull?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-//        case groupMembershipID
-//        case name
-//        case resultDescription
-//        case createdAt
-//        case distance
-//        case elevationGain
-//        case elevationLoss
-//        case visibility
-//        case firstLat
-//        case firstLng
-//        case lastLat
-//        case lastLng
-//        case isTrip
-//        case postalCode
-//        case locality
-//        case administrativeArea
-//        case pavementTypeID
-//        case countryCode
-//        case hasCoursePoints
-//        case updatedAt
-//        case bestForID
-//        case plannerOptions
-//        case userID
-//        case deletedAt
-//        case swLng
-//        case swLat
-//        case neLng
-//        case neLat
-//        case trackID
-//        case archivedAt
-//        case likesCount
-//        case highlightedPhotoID
-//        case highlightedPhotoChecksum
-    }
-}

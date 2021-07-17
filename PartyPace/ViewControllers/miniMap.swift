@@ -14,74 +14,181 @@ class MiniMap: MKMapView {
     var mapPoints = [CLLocationCoordinate2D]()
     
  
-    func loadRoute() {
+    fileprivate func requestRouteDetailsAndDisplayRoute(identifier: Int?) {
+        var request = createUserRouteDetailsRequest(routeID: identifier!)
         
-                let url = URL(string: "https://ridewithgps.com/users/current.json")
-                guard let requestUrl = url else { fatalError() }
+        // Send HTTP Request
+        let task = URLSession.shared.dataTask(with: request!) { (data, response, error) in
+            
+            // Check if Error took place
+            if let error = error {
+                print("Error took place \(error)")
+                return
+            }
+            
+            // Read HTTP Response Status code
+            if let response = response as? HTTPURLResponse {
+                print("Response HTTP Status code: \(response.statusCode)")
+            }
+            
+            // Convert HTTP Response Data to a simple String
+            if let data = data, let dataString = String(data: data, encoding: .utf8) {
+                let decoder = JSONDecoder()
+                
+                if let jsonData = dataString.data(using: .utf8) {
+//                    print(dataString)
+                    do {
+                        let userRoutes = try decoder.decode(Results.self, from: jsonData)
+                        
+//                        print(userRoutes)
+                        
+                        for point in userRoutes.route.trackPoints {
+                            let routePoint = GPXRoutePoint(latitude: point.y, longitude: point.x)
+                            self.gpxRoute.points.append(routePoint)
+                            self.mapPoints.append(CLLocationCoordinate2D(latitude: routePoint.latitude!, longitude: routePoint.longitude!))
 
-                // Create URL Request
-                var request = URLRequest(url: requestUrl)
-        
-                // Specify HTTP Method to use
-                request.httpMethod = "GET"
-                request.addValue("apikey", forHTTPHeaderField: "674d66d1")
-                request.addValue("version", forHTTPHeaderField: "2")
-//                request.addValue("auth_token", forHTTPHeaderField: "942927bd9e0b862a129ce34bb7824b6f")
-                request.addValue("email", forHTTPHeaderField: "abhoward9@icloud.com")
-                request.addValue("password", forHTTPHeaderField: "3EWYzfbYmLY8oD")
-
-                // Send HTTP Request
-                let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-                    
-                    // Check if Error took place
-                    if let error = error {
-                        print("Error took place \(error)")
-                        return
-                    }
-                    
-                    // Read HTTP Response Status code
-                    if let response = response as? HTTPURLResponse {
-                        print("Response HTTP Status code: \(response.statusCode)")
-                    }
-                    
-                    // Convert HTTP Response Data to a simple String
-                    if let data = data, let dataString = String(data: data, encoding: .utf8) {
-                        let decoder = JSONDecoder()
-          
-                        if let jsonData = dataString.data(using: .utf8) {
-                            print(dataString)
-                            do {
-                                let route = try decoder.decode(Route.self, from: jsonData)
-                                
-                                
-                                for point in route.trackPoints {
-        //                            print(point)
-                                    let routePoint = GPXRoutePoint(latitude: point.y, longitude: point.x)
-                                    self.gpxRoute.points.append(routePoint)
-        //                            print(routePoint.latitude, routePoint.longitude)
-                                    self.mapPoints.append(CLLocationCoordinate2D(latitude: routePoint.latitude!, longitude: routePoint.longitude!))
-                                    
-                                    
-                                }
-                                DispatchQueue.main.async {
-                                    
-                                
-                                let polyline = MKPolyline(coordinates: self.mapPoints, count: self.mapPoints.count)
-                        //        mapView.addOverlay(polyline)
-                        //        let render = MKPolylineRenderer(polyline: polyline)
-                                self.addOverlay(polyline)
-                                }
-
-                            } catch {
-                                print(error)
-                            }
                         }
-                    
+                        DispatchQueue.main.async {
+                            
+                            
+                            let polyline = MKPolyline(coordinates: self.mapPoints, count: self.mapPoints.count)
+//                            self.addOverlay(polyline)
+                            let render = MKPolylineRenderer(polyline: polyline)
+                            self.addOverlay(polyline)
+                        }
+                        
+                    } catch {
+                        print(error)
+                    }
                 }
-                        }
-
-                task.resume()
+                
+            }
+        }
+        task.resume()
     }
+    
+    func loadRoute() {
+        let group = DispatchGroup()
+
+//        let urls = [
+//            URL(string: userRoutes()),
+//        ]
+        var identifier: Int?
+//        for url in urls {
+            group.enter()
+            var request = createUserRoutesRequest()
+            
+            // Send HTTP Request
+            let task = URLSession.shared.dataTask(with: request!) { (data, response, error) in
+                
+                // Check if Error took place
+                if let error = error {
+                    print("Error took place \(error)")
+                    return
+                }
+                
+                // Read HTTP Response Status code
+                if let response = response as? HTTPURLResponse {
+                    print("Response HTTP Status code: \(response.statusCode)")
+                }
+                
+                // Convert HTTP Response Data to a simple String
+                if let data = data, let dataString = String(data: data, encoding: .utf8) {
+                    let decoder = JSONDecoder()
+                    
+                    if let jsonData = dataString.data(using: .utf8) {
+                        //                                        print(dataString)
+                        do {
+                            let userRoutes = try decoder.decode(UserRoutes.self, from: jsonData)
+                            
+                            identifier = userRoutes.results[0].id
+                            
+                            
+                            group.leave()
+                            
+                            DispatchQueue.main.async {
+            
+            
+
+                                            }
+            
+                                        } catch {
+                                            print(error)
+                                        }
+                                    }
+            
+                                }
+                            }
+                            task.resume()
+
+//                }
+        group.notify(queue: .main) {
+            self.requestRouteDetailsAndDisplayRoute(identifier: identifier)
+
+                }
+        }
+        
+    
+    
+    
+//    func loadRoute() {
+//
+//
+//        var request = createUserRoutesRequest()
+//
+//                // Send HTTP Request
+//                let task = URLSession.shared.dataTask(with: request!) { (data, response, error) in
+//
+//                    // Check if Error took place
+//                    if let error = error {
+//                        print("Error took place \(error)")
+//                        return
+//                    }
+//
+//                    // Read HTTP Response Status code
+//                    if let response = response as? HTTPURLResponse {
+//                        print("Response HTTP Status code: \(response.statusCode)")
+//                    }
+//
+//                    // Convert HTTP Response Data to a simple String
+//                    if let data = data, let dataString = String(data: data, encoding: .utf8) {
+//                        let decoder = JSONDecoder()
+//
+//                        if let jsonData = dataString.data(using: .utf8) {
+//                            print(dataString)
+//                            do {
+//                                let userRoutes = try decoder.decode(UserRoutes.self, from: jsonData)
+//
+//                                let firstRoute = userRoutes.results[0].id
+//
+////                                for point in userRoutes.results {
+////        //                            print(point)
+////                                    let routePoint = GPXRoutePoint(latitude: point.y, longitude: point.x)
+////                                    self.gpxRoute.points.append(routePoint)
+////        //                            print(routePoint.latitude, routePoint.longitude)
+////                                    self.mapPoints.append(CLLocationCoordinate2D(latitude: routePoint.latitude!, longitude: routePoint.longitude!))
+////
+////
+////                                }
+//                                DispatchQueue.main.async {
+//
+//
+////                                let polyline = MKPolyline(coordinates: self.mapPoints, count: self.mapPoints.count)
+//                        //        mapView.addOverlay(polyline)
+//                        //        let render = MKPolylineRenderer(polyline: polyline)
+////                                self.addOverlay(polyline)
+//                                }
+//
+//                            } catch {
+//                                print(error)
+//                            }
+//                        }
+//
+//                    }
+//                }
+//
+//                task.resume()
+//    }
     
     required init?(coder aDecoder: NSCoder) {
        super.init(coder: aDecoder)

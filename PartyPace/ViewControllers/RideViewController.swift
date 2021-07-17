@@ -53,9 +53,7 @@ class RideViewController: UIViewController {
                 if let jsonData = dataString.data(using: .utf8) {
 
                     do {
-//                        print(dataString)
-//                        let route = try decoder.decode(Route.self, from: jsonData)
-//                        let route = try decoder.decode(UserRoutes.self, from: jsonData)
+
                         let welcome = try decoder.decode([UserRoute].self, from: jsonData)
                         
                         print(welcome[0].id)
@@ -73,8 +71,7 @@ class RideViewController: UIViewController {
                             
                         
                         let polyline = MKPolyline(coordinates: self.mapPoints, count: self.mapPoints.count)
-                //        mapView.addOverlay(polyline)
-                //        let render = MKPolylineRenderer(polyline: polyline)
+
                         self.mapView.addOverlay(polyline)
                         }
 
@@ -87,10 +84,7 @@ class RideViewController: UIViewController {
                 }
 
         task.resume()
-//        let polyline = MKPolyline(coordinates: self.mapPoints, count: self.mapPoints.count)
-////        mapView.addOverlay(polyline)
-////        let render = MKPolylineRenderer(polyline: polyline)
-//        self.mapView.addOverlay(polyline)
+
         
 
     }
