@@ -20,6 +20,7 @@ struct Results: Codable {
     let route: Route
 }
 
+
 struct UserRoutes: Codable {
     let results: [Result]
     let resultsCount: Int
@@ -108,7 +109,7 @@ struct Route: Codable {
 //    let createdAt, updatedAt: Date
 //    let name, routeDescription: String
 //    let firstLng, firstLat, lastLat, lastLng: Double
-//    let boundingBox: [BoundingBox]
+    let boundingBox: [BoundingBox]
 //    let locality, postalCode, administrativeArea, countryCode: String
 //    let privacyCode: JSONNull?
 //    let user: User
@@ -141,7 +142,7 @@ struct Route: Codable {
 //        case firstLat = "first_lat"
 //        case lastLat = "last_lat"
 //        case lastLng = "last_lng"
-//        case boundingBox = "bounding_box"
+        case boundingBox = "bounding_box"
 //        case locality
 //        case postalCode = "postal_code"
 //        case administrativeArea = "administrative_area"
@@ -380,14 +381,6 @@ struct TrackPoint: Codable {
 
 
 // MARK: - Encode/decode helpers
-
-
-
-
-// This file was generated from JSON Schema using quicktype, do not modify it directly.
-// To parse the JSON, add this file to your project and do:
-//
-//   let welcome = try? newJSONDecoder().decode(Welcome.self, from: jsonData)
 
 
 
@@ -824,34 +817,34 @@ struct User: Codable {
 }
 
 // MARK: - Preferences
-struct Preferences: Codable {
-    let defaultPrivacyTrip, defaultPrivacyRoute: Int
-    let metricUnits: Bool
-    let routePlannerDirectionsType: String
-    let routePlannerRightSidebarClosed, receiveSegmentNotifications, showDashOnboardingOverlay, plannerOnboardingDismissed: Bool
-    let plannerOverlay: String
-    let showCoursepointIcons, routePlannerLeftSidebarClosed: Bool
-    let facebook: Facebook
-    let defaultCareerInterval, smartExportState, routeViewerActiveSubtab: String
-
-    enum CodingKeys: String, CodingKey {
-        case defaultPrivacyTrip = "default_privacy_trip"
-        case defaultPrivacyRoute = "default_privacy_route"
-        case metricUnits = "metric_units"
-        case routePlannerDirectionsType = "route_planner_directions_type"
-        case routePlannerRightSidebarClosed = "route_planner_right_sidebar_closed"
-        case receiveSegmentNotifications = "receive_segment_notifications"
-        case showDashOnboardingOverlay = "show_dash_onboarding_overlay"
-        case plannerOnboardingDismissed = "planner-onboarding-dismissed"
-        case plannerOverlay = "planner_overlay"
-        case showCoursepointIcons = "show_coursepoint_icons"
-        case routePlannerLeftSidebarClosed = "route_planner_left_sidebar_closed"
-        case facebook
-        case defaultCareerInterval = "default_career_interval"
-        case smartExportState = "smart_export_state"
-        case routeViewerActiveSubtab = "route_viewer_active_subtab"
-    }
-}
+//struct Preferences: Codable {
+//    let defaultPrivacyTrip, defaultPrivacyRoute: Int
+//    let metricUnits: Bool
+//    let routePlannerDirectionsType: String
+//    let routePlannerRightSidebarClosed, receiveSegmentNotifications, showDashOnboardingOverlay, plannerOnboardingDismissed: Bool
+//    let plannerOverlay: String
+//    let showCoursepointIcons, routePlannerLeftSidebarClosed: Bool
+//    let facebook: Facebook
+//    let defaultCareerInterval, smartExportState, routeViewerActiveSubtab: String
+//
+//    enum CodingKeys: String, CodingKey {
+//        case defaultPrivacyTrip = "default_privacy_trip"
+//        case defaultPrivacyRoute = "default_privacy_route"
+//        case metricUnits = "metric_units"
+//        case routePlannerDirectionsType = "route_planner_directions_type"
+//        case routePlannerRightSidebarClosed = "route_planner_right_sidebar_closed"
+//        case receiveSegmentNotifications = "receive_segment_notifications"
+//        case showDashOnboardingOverlay = "show_dash_onboarding_overlay"
+//        case plannerOnboardingDismissed = "planner-onboarding-dismissed"
+//        case plannerOverlay = "planner_overlay"
+//        case showCoursepointIcons = "show_coursepoint_icons"
+//        case routePlannerLeftSidebarClosed = "route_planner_left_sidebar_closed"
+//        case facebook
+//        case defaultCareerInterval = "default_career_interval"
+//        case smartExportState = "smart_export_state"
+//        case routeViewerActiveSubtab = "route_viewer_active_subtab"
+//    }
+//}
 
 // MARK: - Facebook
 struct Facebook: Codable {
@@ -881,10 +874,10 @@ enum AssociatedObjectType: String, Codable {
 }
 
 // MARK: - UnseenUpdate
-struct UnseenUpdate: Codable {
-    let key: String
-    let count: Int
-}
+//struct UnseenUpdate: Codable {
+//    let key: String
+//    let count: Int
+//}
 
 
 

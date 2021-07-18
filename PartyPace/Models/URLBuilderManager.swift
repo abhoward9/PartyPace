@@ -12,19 +12,19 @@ func baseURLString() -> String {
     return "https://ridewithgps.com"
 }
 
-func userRoutes() -> String {
+func userRoutesURLString(userID: Int) -> String {
     //MARK: MY ID
-    let userID = "518136"
     return baseURLString() + "/users/\(userID)/routes.json"
 }
 
-func routeDetails(routeID: Int) -> String {
+func routeDetailsURLString(routeID: Int) -> String {
     return baseURLString() + "/routes/\(routeID).json"
 }
 
+//Creates request to pass route ID and get details of route like GPS coordinates
 func getRouteDetailsRequest(routeID: Int, query: [String: String]) -> URLRequest? {
 
-    let url = URL(string: routeDetails(routeID: routeID))
+    let url = URL(string: routeDetailsURLString(routeID: routeID))
 
  
     guard let newURL = url!.withQueries(query) else { fatalError() }
@@ -45,93 +45,68 @@ func getRouteDetailsRequest(routeID: Int, query: [String: String]) -> URLRequest
 }
 
 
-
-func getUserRoutesURLRequest(query: [String: String]) -> URLRequest? {
-
-    let url = URL(string: userRoutes())
-
- 
-    guard let newURL = url!.withQueries(query) else { fatalError() }
-    
-    
-    
-//    guard let requestUrl = newURL else { fatalError() }
-
-    // Create URL Request
-    var request = URLRequest(url: newURL)
-
-    // Specify HTTP Method to use
-    request.httpMethod = "GET"
-
-
-    
-    return request
-}
-
-func createUserRoutesRequest() -> URLRequest? {
-    
-    let query: [String: String] = [
-//        "email": "abhoward9@icloud.com",
-//        "apikey": "674d66d1",
-////        "email": "abhoward9@icloud.com",
 //
-//        "password": "3EWYzfbYmLY8oD"
+func getUserRoutesURLRequest(userID: Int, query: [String: String]) -> URLRequest? {
+
+    let url = URL(string: userRoutesURLString(userID: userID))
+
+ 
+    guard let newURL = url!.withQueries(query) else { fatalError() }
+    
+    
+    
+//    guard let requestUrl = newURL else { fatalError() }
+
+    // Create URL Request
+    var request = URLRequest(url: newURL)
+
+    // Specify HTTP Method to use
+    request.httpMethod = "GET"
+
+
+    
+    return request
+}
+
+typealias query = [String: String]
+
+func getNumberOfUserRoutesURLRequest(userID: Int) -> URLRequest? {
+    
+    let userRouteQueryItems: query = [
         
           "offset": "0",
-          "limit": "1",
+          "limit": "0",
           "apikey": "674d66d1",
-          "version": "2",
+//          "version": "2",
           "auth_token": "b3a08a5799f1810825666a6e84913e18"
         
     ]
+
     
-    guard let requestUrl = getUserRoutesURLRequest(query: query) else { fatalError() }
-    
-    
-    // Create URL Request
+    guard let requestUrl = getUserRoutesURLRequest(userID: userID, query: userRouteQueryItems) else { fatalError() }
     
     
     
-    // Send HTTP Request
-    print(requestUrl)
-//    let task = URLSession.shared.dataTask(with: requestUrl) { (data, response, error) in
-//
-//        // Check if Error took place
-//        if let error = error {
-//            print("Error took place \(error)")
-//            return
-//        }
-//
-//        // Read HTTP Response Status code
-//        if let response = response as? HTTPURLResponse {
-//            print("Response HTTP Status code: \(response.statusCode)")
-//        }
-//
-//        // Convert HTTP Response Data to a simple String
-//        if let data = data, let dataString = String(data: data, encoding: .utf8) {
-//            let decoder = JSONDecoder()
-//            if let jsonData = dataString.data(using: .utf8) {
-//
-//                do {
-//                    print(dataString)
-//                    let currentUser = try decoder.decode(UserRoutes.self, from: jsonData)
-//
-//                    print(currentUser.results[0].id)
-//
-//                    DispatchQueue.main.async {
-//
-//
-//                    }
-//
-//                } catch {
-//                    print(error)
-//                }
-//            }
-//
-//        }
-//    }
-//
-//    task.resume()
+    
+    return requestUrl
+}
+
+func getIDOfLatestRoute(numberOfRoutes: Int, userID: Int) -> URLRequest? {
+    
+    let userRouteQueryItems: query = [
+        
+          "offset": "\(numberOfRoutes-1)",
+          "limit": "1",
+          "apikey": "674d66d1",
+//          "version": "2",
+          "auth_token": "b3a08a5799f1810825666a6e84913e18"
+        
+    ]
+
+    
+    guard let requestUrl = getUserRoutesURLRequest(userID: userID, query: userRouteQueryItems) else { fatalError() }
+    
+    
     
     
     return requestUrl
@@ -150,12 +125,13 @@ func createUserRouteDetailsRequest(routeID: Int) -> URLRequest? {
     guard let requestUrl = getRouteDetailsRequest(routeID: routeID, query: query) else { fatalError() }
     
 
-    print(requestUrl)
 
     
     
     return requestUrl
 }
+
+
 
 extension URL {
     func withQueries(_ queries: [String: String]) -> URL? {
