@@ -33,14 +33,44 @@ class RideCreationViewController: UIViewController {
 
         let newride = RideWithUserPreferences(rideName: "hello", time: Date(), paceSetting: .cat1, tireRecommendation: .over32, privacySetting: .groupRide)
         
-        db.collection("Routes").document("\(counter)").setData([ "ride1": "\(newride.StartTime)"
-        ]) { err in
-            if let err = err {
-                print("Error writing document: \(err)")
+        let geocoder = CLGeocoder()
+        
+        geocoder.reverseGeocodeLocation(CLLocation(latitude: rideMap.partyPaceRoute.RideStartLocation!.coordinate.latitude, longitude: rideMap.partyPaceRoute.RideStartLocation!.coordinate.longitude)) { placemarks, error in
+            if let error = error {
+                print(error)
             } else {
-                print("Document successfully written!")
+                
+                let zipCode = placemarks![0].postalCode!
+                
+                let subZip = zipCode.dropLast(2)
+                var ref: DocumentReference? = nil
+                self.db.collection("Routes").document("\(subZip)").collection("\(zipCode)").addDocument(data: [
+                    "name": "\(newride.StartTime)",
+                    "route": "\(newride.minTire?.rawValue)"
+                    
+                ]) { err in
+                    if let err = err {
+                        print("Error adding document: \(err)")
+                    } else {
+//                        print("Document added with ID: \(ref!.documentID)")
+                    }
+                }
+//                self.db.collection("Routes").document("\(subZip)").collection("\(zipCode)").document("97203").setData([ "test": "\(newride.StartTime!)"]) { err in
+//                    if let err = err {
+//                        print("Error writing document: \(err)")
+//                    } else {
+//                        print("Document successfully written!")
+//                    }
+//                }
+                
+                
             }
         }
+        
+//        db.collection("Routes").document("\(9000)").setData([ "ride1": "\(newride.StartTime)"
+
+        
+        
     }
     
     @IBAction func GetRideButtonPressed(_ sender: Any) {
@@ -82,8 +112,9 @@ class RideCreationViewController: UIViewController {
         privacyPicker.dataSource = self
         privacyPicker.delegate = self
         rideMap.delegate = rideMap
-        rideMap.loadRoute()
-
+        var partyPaceRoute = rideMap.loadRoute()
+        
+        
         
     }
 

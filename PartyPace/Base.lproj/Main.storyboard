@@ -113,7 +113,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="cBC-Ob-sZj"/>
             </objects>
-            <point key="canvasLocation" x="1760.8695652173915" y="-48.214285714285715"/>
+            <point key="canvasLocation" x="-833" y="1628"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="6Fc-x7-B7D">
@@ -194,7 +194,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tbj-tM-gRc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1733.3333333333335" y="742.63392857142856"/>
+            <point key="canvasLocation" x="2643.4782608695655" y="742.63392857142856"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="YHh-7z-d8d">
@@ -208,55 +208,38 @@
                     </tabBar>
                     <connections>
                         <segue destination="FRt-kr-Zyc" kind="relationship" relationship="viewControllers" id="Sku-bJ-H8C"/>
+                        <segue destination="mOV-xC-oeg" kind="relationship" relationship="viewControllers" id="5v5-OJ-gvp"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XKN-Na-X4d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-59.420289855072468" y="-48.214285714285715"/>
         </scene>
-        <!--Ride View Controller-->
-        <scene sceneID="rht-Bf-RU1">
+        <!--Item-->
+        <scene sceneID="SZ5-tv-fjX">
             <objects>
-                <viewController id="PLn-Zf-tFm" customClass="RideViewController" customModule="PartyPace" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="XM1-hG-Zos">
+                <viewController id="mOV-xC-oeg" customClass="FindPartyPaceRidesViewController" customModule="PartyPace" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BSU-JS-i0s">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="B6b-k4-nwD">
-                                <rect key="frame" x="0.0" y="192" width="414" height="670"/>
-                            </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="muZ-bf-Dj1">
-                                <rect key="frame" x="202" y="97" width="87" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NF8-ru-S7r">
+                                <rect key="frame" x="51" y="92" width="121" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Find Rides button"/>
                                 <connections>
-                                    <action selector="loadLine:" destination="PLn-Zf-tFm" eventType="touchUpInside" id="aMd-WY-s0s"/>
+                                    <action selector="FindRidesButtonPressed:" destination="mOV-xC-oeg" eventType="touchUpInside" id="9iF-6d-1D1"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zgg-uT-SAv">
-                                <rect key="frame" x="20" y="97" width="97" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="z2u-Uc-XqO"/>
+                        <viewLayoutGuide key="safeArea" id="b0x-38-5Wm"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="B6b-k4-nwD" firstAttribute="top" secondItem="z2u-Uc-XqO" secondAttribute="top" id="9bH-qh-6Rm"/>
-                            <constraint firstItem="B6b-k4-nwD" firstAttribute="leading" secondItem="z2u-Uc-XqO" secondAttribute="leading" id="EVS-yi-PLx"/>
-                            <constraint firstItem="z2u-Uc-XqO" firstAttribute="trailing" secondItem="B6b-k4-nwD" secondAttribute="trailing" id="afL-yr-R3o"/>
-                            <constraint firstItem="z2u-Uc-XqO" firstAttribute="bottom" secondItem="B6b-k4-nwD" secondAttribute="bottom" id="iuF-bc-8Xe"/>
-                        </constraints>
                     </view>
-                    <connections>
-                        <outlet property="URLfield" destination="zgg-uT-SAv" id="QWH-uV-aAp"/>
-                        <outlet property="mapView" destination="B6b-k4-nwD" id="eOh-vp-65C"/>
-                    </connections>
+                    <tabBarItem key="tabBarItem" title="Item" id="mZq-Ar-y05"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZOt-Og-dmK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="INe-G7-oru" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-301.44927536231887" y="634.82142857142856"/>
+            <point key="canvasLocation" x="426" y="783"/>
         </scene>
         <!--Organize-->
         <scene sceneID="75O-i4-pvT">
@@ -275,7 +258,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wyS-GJ-P0z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="850.72463768115949" y="-48.214285714285715"/>
+            <point key="canvasLocation" x="-833" y="784"/>
         </scene>
     </scenes>
     <resources>
