@@ -101,6 +101,7 @@
                     <navigationItem key="navigationItem" id="7uH-8Q-Yvs"/>
                     <connections>
                         <outlet property="attendanceList" destination="O0o-W1-h8h" id="XrL-e2-0kd"/>
+                        <outlet property="dateTimePicker" destination="m8a-Wh-ZQj" id="Ugo-zv-JWK"/>
                         <outlet property="paceLabel" destination="LQw-nd-LuN" id="0l5-4P-mpm"/>
                         <outlet property="pacePicker" destination="0Kr-s3-BXt" id="uNV-Sh-vKq"/>
                         <outlet property="privacyPicker" destination="Yor-1A-Gr9" id="rDY-6i-4oI"/>

@@ -15,6 +15,10 @@ import Foundation
 import Foundation
 
 // MARK: - Welcome
+
+
+
+
 struct Results: Codable {
     let type: String
     let route: Route
@@ -73,27 +77,27 @@ struct BoundingBox: Codable {
 }
 
 // MARK: - CoursePoint
-struct CoursePoint: Codable {
-    let d: Double
-    let coursePointDescription: String?
-    let i: Int
-    let n: String
-    let t: T
-    let x, y: Double
-    let e: Int?
+//struct CoursePoint: Codable {
+//    let d: Double
+//    let coursePointDescription: String?
+//    let i: Int
+//    let n: String
+//    let t: T
+//    let x, y: Double
+//    let e: Int?
+//
+//    enum CodingKeys: String, CodingKey {
+//        case d
+//        case coursePointDescription = "description"
+//        case i, n, t, x, y
+//        case e = "_e"
+//    }
+//}
 
-    enum CodingKeys: String, CodingKey {
-        case d
-        case coursePointDescription = "description"
-        case i, n, t, x, y
-        case e = "_e"
-    }
-}
-
-enum T: String, Codable {
-    case tLeft = "Left"
-    case tRight = "Right"
-}
+//enum T: String, Codable {
+//    case tLeft = "Left"
+//    case tRight = "Right"
+//}
 
 // MARK: - RouteMetrics
 struct RouteMetrics: Codable {
@@ -512,27 +516,27 @@ struct User: Codable {
 //}
 
 // MARK: - Facebook
-struct Facebook: Codable {
-    let notifyOnActivity, notifyOnRoute: Bool
-
-    enum CodingKeys: String, CodingKey {
-        case notifyOnActivity = "notify_on_activity"
-        case notifyOnRoute = "notify_on_route"
-    }
-}
+//struct Facebook: Codable {
+//    let notifyOnActivity, notifyOnRoute: Bool
+//
+//    enum CodingKeys: String, CodingKey {
+//        case notifyOnActivity = "notify_on_activity"
+//        case notifyOnRoute = "notify_on_route"
+//    }
+//}
 
 // MARK: - SlimFavorite
-struct SlimFavorite: Codable {
-    let id: Int
-    let associatedObjectType: AssociatedObjectType
-    let associatedObjectID: Int
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case associatedObjectType = "associated_object_type"
-        case associatedObjectID = "associated_object_id"
-    }
-}
+//struct SlimFavorite: Codable {
+//    let id: Int
+//    let associatedObjectType: AssociatedObjectType
+//    let associatedObjectID: Int
+//
+//    enum CodingKeys: String, CodingKey {
+//        case id
+//        case associatedObjectType = "associated_object_type"
+//        case associatedObjectID = "associated_object_id"
+//    }
+//}
 
 enum AssociatedObjectType: String, Codable {
     case route = "route"

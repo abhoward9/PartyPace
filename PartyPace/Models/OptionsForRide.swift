@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum tireChoices: String, CaseIterable {
+enum tireChoices: String, CaseIterable, Codable {
     case road
     case over32
     case over40
@@ -15,11 +15,11 @@ enum tireChoices: String, CaseIterable {
     
 }
 
-enum paceChoices: String, CaseIterable {
+enum paceChoices: String, CaseIterable, Codable {
     case party, noDrop, cat5, cat4, cat3, cat2, cat1
 }
 
-enum privacyChoices: String, CaseIterable {
+enum privacyChoices: String, CaseIterable, Codable {
     case publicRide
     case privateRide
     case groupRide

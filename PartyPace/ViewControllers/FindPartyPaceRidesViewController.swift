@@ -20,7 +20,7 @@ class FindPartyPaceRidesViewController: UIViewController, CLLocationManagerDeleg
     }
     
     func findRides() {
-
+        
         let db = Firestore.firestore()
         
 
@@ -87,7 +87,6 @@ class FindPartyPaceRidesViewController: UIViewController, CLLocationManagerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        super.viewDidLoad()
 
                 locationManager.delegate = self
                 locationManager.requestWhenInUseAuthorization()

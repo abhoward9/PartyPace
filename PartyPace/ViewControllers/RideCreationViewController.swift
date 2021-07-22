@@ -10,8 +10,7 @@ import CoreLocation
 import MapKit
 import FirebaseDatabase
 import FirebaseFirestore
-
-
+import FirebaseFirestoreSwift
 
 class RideCreationViewController: UIViewController {
     var authToken: String!
@@ -22,20 +21,31 @@ class RideCreationViewController: UIViewController {
     @IBOutlet weak var paceLabel: UILabel!
     @IBOutlet weak var rideMap: MiniMap!
     
+    @IBOutlet weak var dateTimePicker: UIDatePicker!
     @IBOutlet weak var pacePicker: UIPickerView!
     
     @IBOutlet weak var tireSizePicker: UIPickerView!
     @IBOutlet weak var privacyPicker: UIPickerView!
+    let db = Firestore.firestore()
+
     
     @IBAction func CreateRideButtonPressed(_ sender: Any) {
         
-        counter += 1
+//        counter += 1
 
-        let newride = RideWithUserPreferences(rideName: "hello", time: Date(), paceSetting: .cat1, tireRecommendation: .over32, privacySetting: .groupRide)
+        var newride = RideWithUserPreferences()
+
+        
+        
+        newride.StartTime = dateTimePicker.date
+        newride.coordinate = GeoPoint(latitude: (rideMap.RideStartLocation?.coordinate.latitude)!, longitude: (rideMap.RideStartLocation?.coordinate.longitude)!)
+        newride.minTire = picker
         
         let geocoder = CLGeocoder()
         
-        geocoder.reverseGeocodeLocation(CLLocation(latitude: rideMap.partyPaceRoute.RideStartLocation!.coordinate.latitude, longitude: rideMap.partyPaceRoute.RideStartLocation!.coordinate.longitude)) { placemarks, error in
+        let location = CLLocation(latitude: newride.coordinate!.latitude, longitude: newride.coordinate!.longitude)
+        
+        geocoder.reverseGeocodeLocation(CLLocation(latitude: rideMap.RideStartLocation!.coordinate.latitude, longitude: rideMap.RideStartLocation!.coordinate.longitude)) { placemarks, error in
             if let error = error {
                 print(error)
             } else {
@@ -44,14 +54,26 @@ class RideCreationViewController: UIViewController {
                 
                 let subZip = zipCode.dropLast(2)
                 var ref: DocumentReference? = nil
-                self.db.collection("Routes").document("\(subZip)").collection("\(zipCode)").addDocument(data: [
-                    "name": "\(newride.StartTime)",
-                    "route": "\(newride.minTire?.rawValue)"
+                
+                
+                
+//                RideWithUserPreferences(rideName: "newRide", time: NSDate.now, paceSetting: .party, tireRecommendation: .over48, privacySetting: .publicRide)
+                
+                
+                do {
+                    try self.db.collection("Routes").document("\(subZip)").collection("\(zipCode)").document("\(newride.StartTime!)").setData(from: newride)
+//                    try self.db.collection("testCollection2").document("testDoc2").setData(from: shareRoute)
+                } catch let error {
+                    print("Error writing city to Firestore: \(error)")
+                }
+//                    try self.db.collection("Routes").document("\(subZip)").collection("\(zipCode)").document("\(NSDate.now)").setData(from: shareRoute)
                     
-                ]) { err in
-                    if let err = err {
-                        print("Error adding document: \(err)")
-                    } else {
+//                            ["name": "\(newride.StartTime)",
+//                    "route": "\(newride.minTire?.rawValue)"])
+//                { err in
+//                    if let err = err {
+//                        print("Error adding document: \(err)")
+//                    } else {
 //                        print("Document added with ID: \(ref!.documentID)")
                     }
                 }
@@ -64,8 +86,8 @@ class RideCreationViewController: UIViewController {
 //                }
                 
                 
-            }
-        }
+//            }
+//        }
         
 //        db.collection("Routes").document("\(9000)").setData([ "ride1": "\(newride.StartTime)"
 
@@ -90,7 +112,7 @@ class RideCreationViewController: UIViewController {
     var privacySetting: privacyChoices?
     
 
-    let db = Firestore.firestore()
+    let sharableRide = RideWithUserPreferences()
     var counter = 0
 
     
@@ -112,7 +134,7 @@ class RideCreationViewController: UIViewController {
         privacyPicker.dataSource = self
         privacyPicker.delegate = self
         rideMap.delegate = rideMap
-        var partyPaceRoute = rideMap.loadRoute()
+        var partyPaceRoute = rideMap.loadLatestRoutefromRWGPS()
         
         
         

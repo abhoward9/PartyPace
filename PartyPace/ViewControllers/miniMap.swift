@@ -9,29 +9,26 @@ import Foundation
 import MapKit
 import CoreGPX
 
-struct PartyPaceRoute {
-    var RideStartLocation: CLLocation?
-    
-    
-}
+//struct PartyPaceRoute {
+//    var RideStartLocation: CLLocation?
+//
+//}
 
 class MiniMap: MKMapView {
     var gpxRoute = GPXRoute()
     var mapPoints = [CLLocationCoordinate2D]()
     
-    var partyPaceRoute = PartyPaceRoute()
+    var RideStartLocation: CLLocation?
+
     
  
    
     
-    func loadRoute() {
+    func loadLatestRoutefromRWGPS() {
         let group = DispatchGroup()
         let userID = 518136
         var latestRouteID: Int?
 
-//        let urls = [
-//            URL(string: userRoutes()),
-//        ]
         var numberOfUserRoutes: Int?
 //        var identifier: Int?
 //        for url in urls {
@@ -256,7 +253,7 @@ class MiniMap: MKMapView {
                             self.addOverlay(polyline)
 //                            self.addOverlay(polyline)
                             self.addOverlay(polyline)
-                            self.partyPaceRoute.RideStartLocation = CLLocation(latitude: userRoutes.route.firstLatitudePoint, longitude: userRoutes.route.firstLongitudePoint)
+                            self.RideStartLocation = CLLocation(latitude: userRoutes.route.firstLatitudePoint, longitude: userRoutes.route.firstLongitudePoint)
                             
                             let height = (boundingBox[1].lng + boundingBox[0].lng)/2
                             let width = (boundingBox[1].lat + boundingBox[0].lat)/2

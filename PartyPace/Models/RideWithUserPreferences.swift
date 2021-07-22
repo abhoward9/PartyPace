@@ -6,9 +6,13 @@
 //
 
 import Foundation
+import CoreLocation
+import FirebaseDatabase
+import FirebaseFirestore
 
 
-class RideWithUserPreferences {
+struct RideWithUserPreferences: Codable {
+    var coordinate: GeoPoint?
     var name: String?
     var StartTime: Date?
     var ridePrivacy: privacyChoices?
@@ -16,13 +20,13 @@ class RideWithUserPreferences {
     var route: String?
     var minTire: tireChoices?
     
-    init(rideName: String?, time: Date, paceSetting: paceChoices, tireRecommendation: tireChoices, privacySetting: privacyChoices) {
-        name = rideName
-        StartTime = time
-        ridePrivacy = privacySetting
-        ridePace = paceSetting
-        minTire = tireRecommendation
-        
-    }
+//    init(rideName: String?, time: Date, paceSetting: paceChoices, tireRecommendation: tireChoices, privacySetting: privacyChoices) {
+//        name = rideName
+//        StartTime = time
+//        ridePrivacy = privacySetting
+//        ridePace = paceSetting
+//        minTire = tireRecommendation
+//
+//    }
     
 }

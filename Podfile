@@ -7,9 +7,9 @@ target 'PartyPace' do
 
   # Pods for PartyPace
 pod 'CoreGPX'
-pod 'Firebase/Analytics'
 pod 'Firebase/Database'
 pod 'Firebase/Auth'
 pod 'Firebase/Firestore'
+pod 'FirebaseFirestoreSwift'
 
 end
