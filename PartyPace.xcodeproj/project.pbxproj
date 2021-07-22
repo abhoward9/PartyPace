@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		492DCF80269D4D4F00BB22ED /* URLBuilderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492DCF7F269D4D4F00BB22ED /* URLBuilderManager.swift */; };
+		49487F0926A8FA2D00132BAB /* CreatePartyPaceRideExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49487F0826A8FA2D00132BAB /* CreatePartyPaceRideExtension.swift */; };
 		4951B60F2689662300ADD5AA /* RideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4951B60E2689662300ADD5AA /* RideViewController.swift */; };
 		498DDA5E2699663300D67C73 /* OptionsForRide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498DDA5D2699663300D67C73 /* OptionsForRide.swift */; };
 		49903C51267C6AE600814BA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49903C50267C6AE600814BA6 /* AppDelegate.swift */; };
@@ -32,6 +33,7 @@
 		3A630C538408D9D823BC97C6 /* Pods-PartyPace.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PartyPace.debug.xcconfig"; path = "Target Support Files/Pods-PartyPace/Pods-PartyPace.debug.xcconfig"; sourceTree = "<group>"; };
 		437F9E8FFDBF5F801D06BCA2 /* Pods_PartyPace.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PartyPace.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		492DCF7F269D4D4F00BB22ED /* URLBuilderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLBuilderManager.swift; sourceTree = "<group>"; };
+		49487F0826A8FA2D00132BAB /* CreatePartyPaceRideExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePartyPaceRideExtension.swift; sourceTree = "<group>"; };
 		4951B60E2689662300ADD5AA /* RideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideViewController.swift; sourceTree = "<group>"; };
 		498DDA5D2699663300D67C73 /* OptionsForRide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsForRide.swift; sourceTree = "<group>"; };
 		49903C4D267C6AE600814BA6 /* PartyPace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PartyPace.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,6 +75,14 @@
 				92815B08FAB1E9B2B9BE55B7 /* Pods-PartyPace.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		49487F0726A8FA0A00132BAB /* Exensions */ = {
+			isa = PBXGroup;
+			children = (
+				49487F0826A8FA2D00132BAB /* CreatePartyPaceRideExtension.swift */,
+			);
+			path = Exensions;
 			sourceTree = "<group>";
 		};
 		49903C44267C6AE500814BA6 = {
@@ -126,6 +136,7 @@
 		49FDFD2C267FF02200535301 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				49487F0726A8FA0A00132BAB /* Exensions */,
 				49903C54267C6AE600814BA6 /* RideCreationViewController.swift */,
 				49FDFD2D267FF08100535301 /* MapViewController.swift */,
 				4951B60E2689662300ADD5AA /* RideViewController.swift */,
@@ -268,6 +279,7 @@
 				49903C6E267DBA4C00814BA6 /* RideWithUserPreferences.swift in Sources */,
 				4951B60F2689662300ADD5AA /* RideViewController.swift in Sources */,
 				49BB56C126A4B8650069FCD0 /* FindPartyPaceRidesViewController.swift in Sources */,
+				49487F0926A8FA2D00132BAB /* CreatePartyPaceRideExtension.swift in Sources */,
 				49FDFD2E267FF08100535301 /* MapViewController.swift in Sources */,
 				49B2AB17269396D4002FBAF3 /* miniMap.swift in Sources */,
 				49BB56BD26A4A4FA0069FCD0 /* JSONhelper.swift in Sources */,

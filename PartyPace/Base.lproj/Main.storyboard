@@ -53,14 +53,6 @@
                                     <action selector="CreateRideButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="E4j-rE-jHF"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eK6-lI-MsQ">
-                                <rect key="frame" x="166" y="716" width="59" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Get Ride"/>
-                                <connections>
-                                    <action selector="GetRideButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kdF-Zx-kni"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pace" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQw-nd-LuN">
                                 <rect key="frame" x="105" y="455" width="38" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

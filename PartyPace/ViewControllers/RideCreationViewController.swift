@@ -27,19 +27,20 @@ class RideCreationViewController: UIViewController {
     @IBOutlet weak var tireSizePicker: UIPickerView!
     @IBOutlet weak var privacyPicker: UIPickerView!
     let db = Firestore.firestore()
+    
+    var newride = RideWithUserPreferences()
+
 
     
     @IBAction func CreateRideButtonPressed(_ sender: Any) {
         
 //        counter += 1
 
-        var newride = RideWithUserPreferences()
 
         
         
         newride.StartTime = dateTimePicker.date
         newride.coordinate = GeoPoint(latitude: (rideMap.RideStartLocation?.coordinate.latitude)!, longitude: (rideMap.RideStartLocation?.coordinate.longitude)!)
-        newride.minTire = picker
         
         let geocoder = CLGeocoder()
         
@@ -57,50 +58,20 @@ class RideCreationViewController: UIViewController {
                 
                 
                 
-//                RideWithUserPreferences(rideName: "newRide", time: NSDate.now, paceSetting: .party, tireRecommendation: .over48, privacySetting: .publicRide)
-                
+
                 
                 do {
-                    try self.db.collection("Routes").document("\(subZip)").collection("\(zipCode)").document("\(newride.StartTime!)").setData(from: newride)
+                    try self.db.collection("Routes").document("\(subZip)").collection("\(zipCode)").document("\(self.newride.StartTime!)").setData(from: self.newride)
 //                    try self.db.collection("testCollection2").document("testDoc2").setData(from: shareRoute)
                 } catch let error {
                     print("Error writing city to Firestore: \(error)")
                 }
-//                    try self.db.collection("Routes").document("\(subZip)").collection("\(zipCode)").document("\(NSDate.now)").setData(from: shareRoute)
-                    
-//                            ["name": "\(newride.StartTime)",
-//                    "route": "\(newride.minTire?.rawValue)"])
-//                { err in
-//                    if let err = err {
-//                        print("Error adding document: \(err)")
-//                    } else {
-//                        print("Document added with ID: \(ref!.documentID)")
-                    }
-                }
-//                self.db.collection("Routes").document("\(subZip)").collection("\(zipCode)").document("97203").setData([ "test": "\(newride.StartTime!)"]) { err in
-//                    if let err = err {
-//                        print("Error writing document: \(err)")
-//                    } else {
-//                        print("Document successfully written!")
-//                    }
-//                }
-                
-                
-//            }
-//        }
-        
-//        db.collection("Routes").document("\(9000)").setData([ "ride1": "\(newride.StartTime)"
 
-        
-        
+
+            }
+            }
     }
-    
-    @IBAction func GetRideButtonPressed(_ sender: Any) {
-        
-                    
-        
-        
-    }
+
     var ref: DatabaseReference!
 
     
@@ -174,41 +145,90 @@ extension RideCreationViewController: UIPickerViewDataSource, UIPickerViewDelega
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if pickerView == pacePicker {
+        
+        
+        switch pickerView {
+        case pacePicker:
             return paceChoices.allCases.count
-
-        } else if pickerView == tireSizePicker{
+        case tireSizePicker:
             return tireChoices.allCases.count
-
-        } else if pickerView == privacyPicker{
+        case privacyPicker:
             return privacyChoices.allCases.count
+        default: return 0
+
         }
-        return 0
+        
+        
+        
+        
+//        if pickerView == pacePicker {
+//            return paceChoices.allCases.count
+//
+//        } else if pickerView == tireSizePicker{
+//            return tireChoices.allCases.count
+//
+//        } else if pickerView == privacyPicker{
+//            return privacyChoices.allCases.count
+//        }
+//        return 0
 
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if pickerView == pacePicker {
+        switch pickerView {
+        case pacePicker:
+            pace = paceChoices.allCases[row]
+            newride.ridePace = pace
             return paceChoices.allCases[row].rawValue
-
-        } else if pickerView == tireSizePicker{
+        case tireSizePicker:
+            recommendedTireSize = tireChoices.allCases[row]
+            newride.minTire = recommendedTireSize
             return tireChoices.allCases[row].rawValue
-
-        } else if pickerView == privacyPicker{
+        case privacyPicker:
+            privacySetting = privacyChoices.allCases[row]
+            newride.ridePrivacy = privacySetting
             return privacyChoices.allCases[row].rawValue
+        default: return ""
+
         }
-        return ""
+        
+//        if pickerView == pacePicker {
+//            return paceChoices.allCases[row].rawValue
+//
+//        } else if pickerView == tireSizePicker{
+//            return tireChoices.allCases[row].rawValue
+//
+//        } else if pickerView == privacyPicker{
+//            return privacyChoices.allCases[row].rawValue
+//        }
+//        return ""
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if pickerView == pacePicker {
+        switch pickerView {
+        case pacePicker:
             pace = paceChoices.allCases[row]
-        } else if pickerView == tireSizePicker{
+            newride.ridePace = pace
+        case tireSizePicker:
             recommendedTireSize = tireChoices.allCases[row]
-
-        } else if pickerView == privacyPicker {
+            newride.minTire = recommendedTireSize
+        case privacyPicker:
             privacySetting = privacyChoices.allCases[row]
+            newride.ridePrivacy = privacySetting
+        default: return
+
         }
+        
+        
+        
+//        if pickerView == pacePicker {
+//            pace = paceChoices.allCases[row]
+//        } else if pickerView == tireSizePicker{
+//            recommendedTireSize = tireChoices.allCases[row]
+//
+//        } else if pickerView == privacyPicker {
+//            privacySetting = privacyChoices.allCases[row]
+//        }
     
         
     }
@@ -217,3 +237,77 @@ extension RideCreationViewController: UIPickerViewDataSource, UIPickerViewDelega
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //                    try self.db.collection("Routes").document("\(subZip)").collection("\(zipCode)").document("\(NSDate.now)").setData(from: shareRoute)
+                            
+        //                            ["name": "\(newride.StartTime)",
+        //                    "route": "\(newride.minTire?.rawValue)"])
+        //                { err in
+        //                    if let err = err {
+        //                        print("Error adding document: \(err)")
+        //                    } else {
+        //                        print("Document added with ID: \(ref!.documentID)")
+//                            }
+//                        }
+        //                self.db.collection("Routes").document("\(subZip)").collection("\(zipCode)").document("97203").setData([ "test": "\(newride.StartTime!)"]) { err in
+        //                    if let err = err {
+        //                        print("Error writing document: \(err)")
+        //                    } else {
+        //                        print("Document successfully written!")
+        //                    }
+        //                }
+                        
+                        
+        //            }
+        //        }
+                
+        //        db.collection("Routes").document("\(9000)").setData([ "ride1": "\(newride.StartTime)"
