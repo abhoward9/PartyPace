@@ -7,9 +7,6 @@
 
 import Foundation
 
-// This file was generated from JSON Schema using quicktype, do not modify it directly.
-// To parse the JSON, add this file to your project and do:
-//
 //   let welcome = try? newJSONDecoder().decode(Welcome.self, from: jsonData)
 
 import Foundation
@@ -26,7 +23,7 @@ struct Results: Codable {
 
 
 struct UserRoutes: Codable {
-    let results: [Result]
+    let results: [RequestResult]
     let resultsCount: Int
 
     enum CodingKeys: String, CodingKey {
@@ -36,7 +33,7 @@ struct UserRoutes: Codable {
 }
 
 // MARK: - Result
-struct Result: Codable {
+struct RequestResult: Codable {
     let id: Int
 
 
@@ -55,11 +52,12 @@ struct Route: Codable {
     
     let firstLongitudePoint: Double
     let firstLatitudePoint: Double
+    let name: String
 
 
     enum CodingKeys: String, CodingKey {
         case id
-
+        case name
         case boundingBox = "bounding_box"
 
         case trackPoints = "track_points"

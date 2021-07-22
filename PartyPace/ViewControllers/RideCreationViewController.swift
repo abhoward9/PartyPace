@@ -11,42 +11,54 @@ import MapKit
 import FirebaseDatabase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import CoreGPX
+
 
 class RideCreationViewController: UIViewController {
+    var gpxRoute = GPXRoute()
+    var mapPoints = [CLLocationCoordinate2D]()
+    
+    var RideStartLocation: CLLocation?
+    var RideTitle: String?
+    
+    
+    
+    
+    
+    
+    
     var authToken: String!
     
     //MARK: IBOutlets and Actions
     @IBOutlet weak var rideTitleField: UITextField!
     @IBOutlet weak var tireSizeLabel: UILabel!
     @IBOutlet weak var paceLabel: UILabel!
-    @IBOutlet weak var rideMap: MiniMap!
+    @IBOutlet weak var rideMap: MKMapView!
     
     @IBOutlet weak var dateTimePicker: UIDatePicker!
     @IBOutlet weak var pacePicker: UIPickerView!
     
     @IBOutlet weak var tireSizePicker: UIPickerView!
     @IBOutlet weak var privacyPicker: UIPickerView!
+    @IBOutlet weak var RideNameTextField: UITextField!
     let db = Firestore.firestore()
     
     var newride = RideWithUserPreferences()
-
-
+    
+    
     
     @IBAction func CreateRideButtonPressed(_ sender: Any) {
         
-//        counter += 1
-
-
         
-        
+        newride.name = RideNameTextField.text
         newride.StartTime = dateTimePicker.date
-        newride.coordinate = GeoPoint(latitude: (rideMap.RideStartLocation?.coordinate.latitude)!, longitude: (rideMap.RideStartLocation?.coordinate.longitude)!)
+        newride.coordinate = GeoPoint(latitude: (RideStartLocation?.coordinate.latitude)!, longitude: (RideStartLocation?.coordinate.longitude)!)
         
         let geocoder = CLGeocoder()
         
         let location = CLLocation(latitude: newride.coordinate!.latitude, longitude: newride.coordinate!.longitude)
         
-        geocoder.reverseGeocodeLocation(CLLocation(latitude: rideMap.RideStartLocation!.coordinate.latitude, longitude: rideMap.RideStartLocation!.coordinate.longitude)) { placemarks, error in
+        geocoder.reverseGeocodeLocation(CLLocation(latitude: RideStartLocation!.coordinate.latitude, longitude: RideStartLocation!.coordinate.longitude)) { placemarks, error in
             if let error = error {
                 print(error)
             } else {
@@ -58,22 +70,21 @@ class RideCreationViewController: UIViewController {
                 
                 
                 
-
+                
                 
                 do {
                     try self.db.collection("Routes").document("\(subZip)").collection("\(zipCode)").document("\(self.newride.StartTime!)").setData(from: self.newride)
-//                    try self.db.collection("testCollection2").document("testDoc2").setData(from: shareRoute)
                 } catch let error {
                     print("Error writing city to Firestore: \(error)")
                 }
-
-
+                
+                
             }
-            }
+        }
     }
-
+    
     var ref: DatabaseReference!
-
+    
     
     var rideDate: Date?
     var rideStartLocation, meetupLocation: CLLocationCoordinate2D?
@@ -82,38 +93,39 @@ class RideCreationViewController: UIViewController {
     var recommendedTireSize: tireChoices?
     var privacySetting: privacyChoices?
     
-
-    let sharableRide = RideWithUserPreferences()
+    
+    //    let sharableRide = RideWithUserPreferences()
     var counter = 0
-
     
     
     
     
-
+    
+    
     
     override func viewDidLoad() {
         
         
         super.viewDidLoad()
         
-//        let xtireSizePicker = TireSizePicker()
         pacePicker.dataSource = self
         pacePicker.delegate = self
         tireSizePicker.dataSource = self
         tireSizePicker.delegate = self
         privacyPicker.dataSource = self
         privacyPicker.delegate = self
-        rideMap.delegate = rideMap
-        var partyPaceRoute = rideMap.loadLatestRoutefromRWGPS()
+        rideMap.delegate = self
+        var partyPaceRoute = loadLatestRoutefromRWGPS()
+        
+        RideNameTextField.placeholder = RideTitle
         
         
         
     }
-
+    
     
     override func viewWillAppear(_ animated: Bool) {
-
+        
         super.viewWillAppear(true)
         
         if let pointLocation = rideStartLocation {
@@ -122,7 +134,7 @@ class RideCreationViewController: UIViewController {
             rideMap.removeAnnotations(rideMap.annotations)
             rideMap.addAnnotation(placemark)
         }
-       
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -134,9 +146,9 @@ class RideCreationViewController: UIViewController {
     @IBAction func unwindToCreationView(_ sender: UIStoryboardSegue) {
         
     }
-
-
-
+    
+    
+    
 }
 
 extension RideCreationViewController: UIPickerViewDataSource, UIPickerViewDelegate {
@@ -155,23 +167,23 @@ extension RideCreationViewController: UIPickerViewDataSource, UIPickerViewDelega
         case privacyPicker:
             return privacyChoices.allCases.count
         default: return 0
-
+            
         }
         
         
         
         
-//        if pickerView == pacePicker {
-//            return paceChoices.allCases.count
-//
-//        } else if pickerView == tireSizePicker{
-//            return tireChoices.allCases.count
-//
-//        } else if pickerView == privacyPicker{
-//            return privacyChoices.allCases.count
-//        }
-//        return 0
-
+        //        if pickerView == pacePicker {
+        //            return paceChoices.allCases.count
+        //
+        //        } else if pickerView == tireSizePicker{
+        //            return tireChoices.allCases.count
+        //
+        //        } else if pickerView == privacyPicker{
+        //            return privacyChoices.allCases.count
+        //        }
+        //        return 0
+        
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
@@ -189,19 +201,19 @@ extension RideCreationViewController: UIPickerViewDataSource, UIPickerViewDelega
             newride.ridePrivacy = privacySetting
             return privacyChoices.allCases[row].rawValue
         default: return ""
-
+            
         }
         
-//        if pickerView == pacePicker {
-//            return paceChoices.allCases[row].rawValue
-//
-//        } else if pickerView == tireSizePicker{
-//            return tireChoices.allCases[row].rawValue
-//
-//        } else if pickerView == privacyPicker{
-//            return privacyChoices.allCases[row].rawValue
-//        }
-//        return ""
+        //        if pickerView == pacePicker {
+        //            return paceChoices.allCases[row].rawValue
+        //
+        //        } else if pickerView == tireSizePicker{
+        //            return tireChoices.allCases[row].rawValue
+        //
+        //        } else if pickerView == privacyPicker{
+        //            return privacyChoices.allCases[row].rawValue
+        //        }
+        //        return ""
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -216,20 +228,11 @@ extension RideCreationViewController: UIPickerViewDataSource, UIPickerViewDelega
             privacySetting = privacyChoices.allCases[row]
             newride.ridePrivacy = privacySetting
         default: return
-
+            
         }
         
         
         
-//        if pickerView == pacePicker {
-//            pace = paceChoices.allCases[row]
-//        } else if pickerView == tireSizePicker{
-//            recommendedTireSize = tireChoices.allCases[row]
-//
-//        } else if pickerView == privacyPicker {
-//            privacySetting = privacyChoices.allCases[row]
-//        }
-    
         
     }
     
@@ -237,6 +240,10 @@ extension RideCreationViewController: UIPickerViewDataSource, UIPickerViewDelega
 
 
 
+//extension RideCreationViewController: UITextFieldDelegate {
+//    texfield
+//
+//}
 
 
 
@@ -286,28 +293,27 @@ extension RideCreationViewController: UIPickerViewDataSource, UIPickerViewDelega
 
 
 
+//                    try self.db.collection("Routes").document("\(subZip)").collection("\(zipCode)").document("\(NSDate.now)").setData(from: shareRoute)
 
-        //                    try self.db.collection("Routes").document("\(subZip)").collection("\(zipCode)").document("\(NSDate.now)").setData(from: shareRoute)
-                            
-        //                            ["name": "\(newride.StartTime)",
-        //                    "route": "\(newride.minTire?.rawValue)"])
-        //                { err in
-        //                    if let err = err {
-        //                        print("Error adding document: \(err)")
-        //                    } else {
-        //                        print("Document added with ID: \(ref!.documentID)")
+//                            ["name": "\(newride.StartTime)",
+//                    "route": "\(newride.minTire?.rawValue)"])
+//                { err in
+//                    if let err = err {
+//                        print("Error adding document: \(err)")
+//                    } else {
+//                        print("Document added with ID: \(ref!.documentID)")
 //                            }
 //                        }
-        //                self.db.collection("Routes").document("\(subZip)").collection("\(zipCode)").document("97203").setData([ "test": "\(newride.StartTime!)"]) { err in
-        //                    if let err = err {
-        //                        print("Error writing document: \(err)")
-        //                    } else {
-        //                        print("Document successfully written!")
-        //                    }
-        //                }
-                        
-                        
-        //            }
-        //        }
-                
-        //        db.collection("Routes").document("\(9000)").setData([ "ride1": "\(newride.StartTime)"
+//                self.db.collection("Routes").document("\(subZip)").collection("\(zipCode)").document("97203").setData([ "test": "\(newride.StartTime!)"]) { err in
+//                    if let err = err {
+//                        print("Error writing document: \(err)")
+//                    } else {
+//                        print("Document successfully written!")
+//                    }
+//                }
+
+
+//            }
+//        }
+
+//        db.collection("Routes").document("\(9000)").setData([ "ride1": "\(newride.StartTime)"

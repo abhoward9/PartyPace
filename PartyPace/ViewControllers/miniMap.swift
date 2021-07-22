@@ -14,17 +14,13 @@ import CoreGPX
 //
 //}
 
-class MiniMap: MKMapView {
-    var gpxRoute = GPXRoute()
-    var mapPoints = [CLLocationCoordinate2D]()
+extension RideCreationViewController: MKMapViewDelegate {
     
-    var RideStartLocation: CLLocation?
-
     
  
-   
+   //tries to load the latest RWGPS route and gets the ID of that route
     
-    func loadLatestRoutefromRWGPS() {
+    func loadLatestRoutefromRWGPS() -> Int? {
         let group = DispatchGroup()
         let userID = 518136
         var latestRouteID: Int?
@@ -138,7 +134,7 @@ class MiniMap: MKMapView {
                 }
 
                     }
-            
+            return latestRouteID
         }
     
     
@@ -233,7 +229,10 @@ class MiniMap: MKMapView {
                         let userRoutes = try decoder.decode(Results.self, from: jsonData)
                         
 //                        print(userRoutes)
+                        self.RideTitle = userRoutes.route.name
                         
+
+
                         for point in userRoutes.route.trackPoints {
                             let routePoint = GPXRoutePoint(latitude: point.y, longitude: point.x)
                             self.gpxRoute.points.append(routePoint)
@@ -246,13 +245,13 @@ class MiniMap: MKMapView {
 
                         DispatchQueue.main.async {
                             
-                            
+                            self.RideNameTextField.placeholder = self.RideTitle
                             let polyline = MKPolyline(coordinates: self.mapPoints, count: self.mapPoints.count)
 //                            self.addOverlay(polyline)
                             let render = MKPolylineRenderer(polyline: polyline)
-                            self.addOverlay(polyline)
+                            self.rideMap.addOverlay(polyline)
 //                            self.addOverlay(polyline)
-                            self.addOverlay(polyline)
+                            self.rideMap.addOverlay(polyline)
                             self.RideStartLocation = CLLocation(latitude: userRoutes.route.firstLatitudePoint, longitude: userRoutes.route.firstLongitudePoint)
                             
                             let height = (boundingBox[1].lng + boundingBox[0].lng)/2
@@ -264,7 +263,7 @@ class MiniMap: MKMapView {
                             let distanceInMeters = coordinate0.distance(from: coordinate1) // result is in meters
                             
                             let camera = MKMapCamera(lookingAtCenter: CLLocationCoordinate2D(latitude: width, longitude: height), fromEyeCoordinate: CLLocationCoordinate2D(latitude: width, longitude: height), eyeAltitude: CLLocationDistance(distanceInMeters*1.5))
-                            self.setCamera(camera, animated: true)
+                            self.rideMap.setCamera(camera, animated: true)
 //                            return partyPaceRoute
                             
                         }
@@ -280,12 +279,14 @@ class MiniMap: MKMapView {
     }
     
     
-    required init?(coder aDecoder: NSCoder) {
-       super.init(coder: aDecoder)
-    }
-}
-
-extension MiniMap: MKMapViewDelegate {
+//    required init?(coder aDecoder: NSCoder) {
+//       super.init(coder: aDecoder)
+//    }
+//}
+//
+//extension MiniMap: MKMapViewDelegate {
+    
+    
 func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
 
     if let routePolyline = overlay as? MKPolyline {

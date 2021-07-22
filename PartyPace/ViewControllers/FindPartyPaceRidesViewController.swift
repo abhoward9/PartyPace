@@ -12,12 +12,18 @@ import FirebaseFirestore
 
 class FindPartyPaceRidesViewController: UIViewController, CLLocationManagerDelegate {
     
-    
+    @IBOutlet weak var LocalRidesTableView: UITableView!
+    var ridesInArea = [RideWithUserPreferences]()
     @IBAction func FindRidesButtonPressed(_ sender: Any) {
         
         
         findRides()
     }
+    
+//    enum FireStoreQueryResult<Value> {
+//        case success(Value)
+//        case failure(Error)
+//    }
     
     func findRides() {
         
@@ -26,7 +32,7 @@ class FindPartyPaceRidesViewController: UIViewController, CLLocationManagerDeleg
 
         locationManager.requestLocation()
         let currentLocation = locationManager.location
-        print(currentLocation?.coordinate)
+//        print(currentLocation?.coordinate)
         let geoCoder = CLGeocoder()
         
         geoCoder.reverseGeocodeLocation(currentLocation!) { placemarks, error in
@@ -43,18 +49,39 @@ class FindPartyPaceRidesViewController: UIViewController, CLLocationManagerDeleg
                         if let err = err {
                             print("Error getting documents: \(err)")
                         } else {
+                            self.ridesInArea.removeAll()
                             for document in querySnapshot!.documents {
-                                print("\(document.documentID) => \(document.data())")
+//                                print("\(document.documentID) => \(document.data())")
+                                
+                                document.reference.getDocument { (document, error) in
+
+                                    let result = Result {
+                                      try document?.data(as: RideWithUserPreferences.self)
+                                    }
+                                    switch result {
+                                    case .success(let ride):
+                                        if let ride = ride {
+                                            // A `City` value was successfully initialized from the DocumentSnapshot.
+                                            self.ridesInArea.append(ride)
+                                            self.LocalRidesTableView.reloadData()
+
+                                        } else {
+                                            // A nil value was successfully initialized from the DocumentSnapshot,
+                                            // or the DocumentSnapshot was nil.
+                                            print("Document does not exist")
+                                        }
+                                    case .failure(let error):
+                                        // A `City` value could not be initialized from the DocumentSnapshot.
+                                        print("Error decoding city: \(error)")
+                                    }
+                                }
+
                             }
+
+                            
                         }
                     }
-    //                self.db.collection("Routes").document("\(subZip)").collection("\(zipCode)").document("97203").setData([ "test": "\(newride.StartTime!)"]) { err in
-    //                    if let err = err {
-    //                        print("Error writing document: \(err)")
-    //                    } else {
-    //                        print("Document successfully written!")
-    //                    }
-    //                }
+    //
                     
                     
                 }
@@ -87,11 +114,14 @@ class FindPartyPaceRidesViewController: UIViewController, CLLocationManagerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        LocalRidesTableView.delegate = self
+        LocalRidesTableView.dataSource = self
 
                 locationManager.delegate = self
                 locationManager.requestWhenInUseAuthorization()
                 locationManager.requestLocation()
-        
+//        locationManager.stopUpdatingLocation()
+        findRides()
     }
     
 
@@ -113,3 +143,32 @@ class FindPartyPaceRidesViewController: UIViewController, CLLocationManagerDeleg
             print("Failed to get users location.")
         }
 }
+
+
+extension FindPartyPaceRidesViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return ridesInArea.count
+    }
+    
+
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // create a new cell if needed or reuse an old one
+
+        let cell = LocalRidesTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+                
+                // set the text from the data model
+        cell.textLabel?.text = self.ridesInArea[indexPath.row].ridePace?.rawValue
+                
+                return cell
+    }
+    
+    
+    
+    
+}
+
+class cell: UITableViewCell {
+    
+}
+
