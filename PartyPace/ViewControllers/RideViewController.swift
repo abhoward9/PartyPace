@@ -58,21 +58,13 @@ class RideViewController: UIViewController {
                         
                         print(welcome[0].id)
                         
-//                        for point in route.trackPoints {
-////                            print(point)
-//                            let routePoint = GPXRoutePoint(latitude: point.y, longitude: point.x)
-//                            self.gpxRoute.points.append(routePoint)
-////                            print(routePoint.latitude, routePoint.longitude)
-//                            self.mapPoints.append(CLLocationCoordinate2D(latitude: routePoint.latitude!, longitude: routePoint.longitude!))
-//
-//
-//                        }
+
                         DispatchQueue.main.async {
                             
-                        
-                        let polyline = MKPolyline(coordinates: self.mapPoints, count: self.mapPoints.count)
-
-                        self.mapView.addOverlay(polyline)
+                            
+                            let polyline = MKPolyline(coordinates: self.mapPoints, count: self.mapPoints.count)
+                            
+                            self.mapView.addOverlay(polyline)
                         }
 
                     } catch {

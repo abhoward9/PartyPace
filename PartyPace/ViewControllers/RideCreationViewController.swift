@@ -50,13 +50,19 @@ class RideCreationViewController: UIViewController {
     @IBAction func CreateRideButtonPressed(_ sender: Any) {
         
         
-        newride.name = RideNameTextField.text
+        if RideNameTextField.text == "" {
+            newride.name = RideNameTextField.placeholder
+
+        } else {
+            newride.name = RideNameTextField.text
+        }
+//        newride.name = RideNameTextField.attributedText?.string
         newride.StartTime = dateTimePicker.date
         newride.coordinate = GeoPoint(latitude: (RideStartLocation?.coordinate.latitude)!, longitude: (RideStartLocation?.coordinate.longitude)!)
         
         let geocoder = CLGeocoder()
         
-        let location = CLLocation(latitude: newride.coordinate!.latitude, longitude: newride.coordinate!.longitude)
+//        let location = CLLocation(latitude: newride.coordinate!.latitude, longitude: newride.coordinate!.longitude)
         
         geocoder.reverseGeocodeLocation(CLLocation(latitude: RideStartLocation!.coordinate.latitude, longitude: RideStartLocation!.coordinate.longitude)) { placemarks, error in
             if let error = error {
@@ -66,14 +72,18 @@ class RideCreationViewController: UIViewController {
                 let zipCode = placemarks![0].postalCode!
                 
                 let subZip = zipCode.dropLast(2)
-                var ref: DocumentReference? = nil
+//                var ref: DocumentReference? = nil
+                
                 
                 
                 
                 
                 
                 do {
-                    try self.db.collection("Routes").document("\(subZip)").collection("\(zipCode)").document("\(self.newride.StartTime!)").setData(from: self.newride)
+                    
+                    let now = Calendar.current.dateComponents(in: .current, from: Date())
+                    print(now.date)
+                    try self.db.collection("Routes").document("\(subZip)").collection("\(zipCode)").document("\(now.day)\(now.month!)\(now.day)+\(now.hour)+\(now.minute)+\(now.second)+\(now.nanosecond)").setData(from: self.newride)
                 } catch let error {
                     print("Error writing city to Firestore: \(error)")
                 }
@@ -95,7 +105,7 @@ class RideCreationViewController: UIViewController {
     
     
     //    let sharableRide = RideWithUserPreferences()
-    var counter = 0
+//    var counter = 0
     
     
     
@@ -105,8 +115,25 @@ class RideCreationViewController: UIViewController {
     
     override func viewDidLoad() {
         
-        
         super.viewDidLoad()
+        
+        let now = Calendar.current.dateComponents(in: .current, from: Date())
+
+        // Create the start of the day in `DateComponents` by leaving off the time.
+//        let today = DateComponents(year: now.year, month: now.month, day: now.day)
+//        let dateToday = Calendar.current.date(from: today)!
+//        print(dateToday.timeIntervalSince1970)
+
+        // Add 1 to the day to get tomorrow.
+        // Don't worry about month and year wraps, the API handles that.
+        let tomorrow = DateComponents(year: now.year, month: now.month, day: now.day! + 1, hour: 9)
+        
+        let dateTomorrow = Calendar.current.date(from: tomorrow)!
+        print(dateTomorrow.timeIntervalSince1970)
+        
+
+        dateTimePicker.date = dateTomorrow
+        
         
         pacePicker.dataSource = self
         pacePicker.delegate = self
@@ -115,7 +142,7 @@ class RideCreationViewController: UIViewController {
         privacyPicker.dataSource = self
         privacyPicker.delegate = self
         rideMap.delegate = self
-        var partyPaceRoute = loadLatestRoutefromRWGPS()
+        _ = loadLatestRoutefromRWGPS()
         
         RideNameTextField.placeholder = RideTitle
         
@@ -139,7 +166,7 @@ class RideCreationViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "mapSegue" {
-            let controller = segue.destination as! UINavigationController
+            _ = segue.destination as! UINavigationController
         }
     }
     
@@ -237,13 +264,6 @@ extension RideCreationViewController: UIPickerViewDataSource, UIPickerViewDelega
     }
     
 }
-
-
-
-//extension RideCreationViewController: UITextFieldDelegate {
-//    texfield
-//
-//}
 
 
 
