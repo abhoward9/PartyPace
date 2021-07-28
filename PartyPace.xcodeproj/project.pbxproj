@@ -22,6 +22,8 @@
 		49903C6E267DBA4C00814BA6 /* RideWithUserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49903C6D267DBA4C00814BA6 /* RideWithUserPreferences.swift */; };
 		49B2AB17269396D4002FBAF3 /* miniMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B2AB16269396D4002FBAF3 /* miniMap.swift */; };
 		49B2AB192693A5FC002FBAF3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49B2AB182693A5FC002FBAF3 /* GoogleService-Info.plist */; };
+		49B4BFF126AE00AD0066ED17 /* RWGPSAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4BFF026AE00AD0066ED17 /* RWGPSAuthViewController.swift */; };
+		49B4BFF326AE907F0066ED17 /* StartPointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4BFF226AE907F0066ED17 /* StartPointViewController.swift */; };
 		49BB56BD26A4A4FA0069FCD0 /* JSONhelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BB56BC26A4A4FA0069FCD0 /* JSONhelper.swift */; };
 		49BB56C126A4B8650069FCD0 /* FindPartyPaceRidesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BB56C026A4B8650069FCD0 /* FindPartyPaceRidesViewController.swift */; };
 		49F1884B268EEA4E008BAAEA /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F1884A268EEA4E008BAAEA /* JSON.swift */; };
@@ -49,6 +51,8 @@
 		49903C6D267DBA4C00814BA6 /* RideWithUserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideWithUserPreferences.swift; sourceTree = "<group>"; };
 		49B2AB16269396D4002FBAF3 /* miniMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = miniMap.swift; sourceTree = "<group>"; };
 		49B2AB182693A5FC002FBAF3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		49B4BFF026AE00AD0066ED17 /* RWGPSAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RWGPSAuthViewController.swift; sourceTree = "<group>"; };
+		49B4BFF226AE907F0066ED17 /* StartPointViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPointViewController.swift; sourceTree = "<group>"; };
 		49BB56BC26A4A4FA0069FCD0 /* JSONhelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONhelper.swift; sourceTree = "<group>"; };
 		49BB56C026A4B8650069FCD0 /* FindPartyPaceRidesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPartyPaceRidesViewController.swift; sourceTree = "<group>"; };
 		49F1884A268EEA4E008BAAEA /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
@@ -138,10 +142,12 @@
 			children = (
 				49487F0726A8FA0A00132BAB /* Exensions */,
 				49903C54267C6AE600814BA6 /* RideCreationViewController.swift */,
+				49B4BFF226AE907F0066ED17 /* StartPointViewController.swift */,
 				49FDFD2D267FF08100535301 /* MapViewController.swift */,
 				4951B60E2689662300ADD5AA /* RideViewController.swift */,
 				49BB56C026A4B8650069FCD0 /* FindPartyPaceRidesViewController.swift */,
 				49B2AB16269396D4002FBAF3 /* miniMap.swift */,
+				49B4BFF026AE00AD0066ED17 /* RWGPSAuthViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -278,9 +284,11 @@
 				49903C53267C6AE600814BA6 /* SceneDelegate.swift in Sources */,
 				49903C6E267DBA4C00814BA6 /* RideWithUserPreferences.swift in Sources */,
 				4951B60F2689662300ADD5AA /* RideViewController.swift in Sources */,
+				49B4BFF326AE907F0066ED17 /* StartPointViewController.swift in Sources */,
 				49BB56C126A4B8650069FCD0 /* FindPartyPaceRidesViewController.swift in Sources */,
 				49487F0926A8FA2D00132BAB /* CreatePartyPaceRideExtension.swift in Sources */,
 				49FDFD2E267FF08100535301 /* MapViewController.swift in Sources */,
+				49B4BFF126AE00AD0066ED17 /* RWGPSAuthViewController.swift in Sources */,
 				49B2AB17269396D4002FBAF3 /* miniMap.swift in Sources */,
 				49BB56BD26A4A4FA0069FCD0 /* JSONhelper.swift in Sources */,
 				492DCF80269D4D4F00BB22ED /* URLBuilderManager.swift in Sources */,

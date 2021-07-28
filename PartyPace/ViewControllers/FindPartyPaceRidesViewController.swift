@@ -11,21 +11,25 @@ import FirebaseDatabase
 import FirebaseFirestore
 
 class FindPartyPaceRidesViewController: UIViewController, CLLocationManagerDelegate {
+    @IBAction func mapTapped(_ sender: UITapGestureRecognizer) {
+
+        print("map tapped")
+    }
+    
+
     
     @IBOutlet weak var LocalRidesTableView: UITableView!
     var ridesInArea = [RideWithUserPreferences]()
-    @IBAction func FindRidesButtonPressed(_ sender: Any) {
-        
-        
-        findRides()
-    }
     
-    //    enum FireStoreQueryResult<Value> {
-    //        case success(Value)
-    //        case failure(Error)
-    //    }
+    private let refreshControl = UIRefreshControl()
+//    @IBAction func FindRidesButtonPressed(_ sender: Any) {
+//
+//
+//        let rides = findRides(_:)
+//    }
     
-    func findRides() {
+   
+    @objc private func findRides(_ Sender: Any) {
         
         let db = Firestore.firestore()
         
@@ -64,6 +68,7 @@ class FindPartyPaceRidesViewController: UIViewController, CLLocationManagerDeleg
                                         // A `City` value was successfully initialized from the DocumentSnapshot.
                                         self.ridesInArea.append(ride)
                                         self.LocalRidesTableView.reloadData()
+                                        self.refreshControl.endRefreshing()
                                         
                                     } else {
                                         // A nil value was successfully initialized from the DocumentSnapshot,
@@ -88,29 +93,13 @@ class FindPartyPaceRidesViewController: UIViewController, CLLocationManagerDeleg
         }
         
         
-        //        let docRef = db.collection("Routes").document("972").collection("97203").getDocuments() { (querySnapshot, err) in
-        //            if let err = err {
-        //                print("Error getting documents: \(err)")
-        //            } else {
-        //                for document in querySnapshot!.documents {
-        //                    print("\(document.documentID) => \(document.data())")
-        //                }
-        //            }
-        //        }
         
-        //        docRef.getDocument { (document, error) in
-        //            if let document = document, document.exists {
-        //                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-        //                print("Document data: \(dataDescription)")
-        //            } else {
-        //                print("Document does not exist")
-        //            }
-        //        }
         
         
     }
     
     let locationManager = CLLocationManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -121,7 +110,17 @@ class FindPartyPaceRidesViewController: UIViewController, CLLocationManagerDeleg
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
         //        locationManager.stopUpdatingLocation()
-        findRides()
+        let rides = findRides(_:)
+        
+        // Add Refresh Control to Table View
+        if #available(iOS 10.0, *) {
+            LocalRidesTableView.refreshControl = refreshControl
+        } else {
+            LocalRidesTableView.addSubview(refreshControl)
+        }
+        
+        refreshControl.addTarget(self, action: #selector(findRides(_:)), for: .valueChanged)
+
     }
     
     

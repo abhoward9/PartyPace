@@ -22,10 +22,13 @@ class RideCreationViewController: UIViewController {
     var RideTitle: String?
     
     
+    var userRoutesResults: Results?
     
     
     
-    
+    @IBAction func meetuplocationpressed(_ sender: Any) {
+        print(meetupLocation)
+    }
     
     var authToken: String!
     
@@ -45,7 +48,49 @@ class RideCreationViewController: UIViewController {
     
     var newride = RideWithUserPreferences()
     
-    
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapImageView(_:)))
+        rideMap.addGestureRecognizer(tapGestureRecognizer)
+        let now = Calendar.current.dateComponents(in: .current, from: Date())
+
+        // Create the start of the day in `DateComponents` by leaving off the time.
+//        let today = DateComponents(year: now.year, month: now.month, day: now.day)
+//        let dateToday = Calendar.current.date(from: today)!
+//        print(dateToday.timeIntervalSince1970)
+
+        // Add 1 to the day to get tomorrow.
+        // Don't worry about month and year wraps, the API handles that.
+        let tomorrow = DateComponents(year: now.year, month: now.month, day: now.day! + 1, hour: 9)
+        
+        let dateTomorrow = Calendar.current.date(from: tomorrow)!
+        print(dateTomorrow.timeIntervalSince1970)
+     
+
+        dateTimePicker.date = dateTomorrow
+        
+        
+        pacePicker.dataSource = self
+        pacePicker.delegate = self
+        tireSizePicker.dataSource = self
+        tireSizePicker.delegate = self
+        privacyPicker.dataSource = self
+        privacyPicker.delegate = self
+        rideMap.delegate = self
+        
+        if let authToken = defaults.string(forKey: "RWGPSAuthKey") {
+        _ = loadLatestRoutefromRWGPS()
+            RideNameTextField.placeholder = RideTitle
+
+        }
+        
+        
+        
+        
+    }
+
     
     @IBAction func CreateRideButtonPressed(_ sender: Any) {
         
@@ -104,236 +149,60 @@ class RideCreationViewController: UIViewController {
     var privacySetting: privacyChoices?
     
     
-    //    let sharableRide = RideWithUserPreferences()
-//    var counter = 0
     
     
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?)  {
+//      if segue.identifier == "fullMapViewSegue",
+//         let gamePickerViewController = segue.destination as? StartPointViewController {
+//        gamePickerViewController.gpxRoute = gpxRoute
+////        gamePickerViewController.mapPoints = mapPoints
+////
+////        gamePickerViewController.RideStartLocation = RideStartLocation
+////
+////        gamePickerViewController.userRoutesResults = userRoutesResults
+//
+//      }
+//    }
     
-    
-    
-    
-    
-    override func viewDidLoad() {
-        
-        super.viewDidLoad()
-        
-        let now = Calendar.current.dateComponents(in: .current, from: Date())
+    @IBAction func didTapImageView(_ sender: UITapGestureRecognizer) {
+        performSegue(withIdentifier: "fullMapViewSegue", sender: UITapGestureRecognizer.self)
+        }
 
-        // Create the start of the day in `DateComponents` by leaving off the time.
-//        let today = DateComponents(year: now.year, month: now.month, day: now.day)
-//        let dateToday = Calendar.current.date(from: today)!
-//        print(dateToday.timeIntervalSince1970)
-
-        // Add 1 to the day to get tomorrow.
-        // Don't worry about month and year wraps, the API handles that.
-        let tomorrow = DateComponents(year: now.year, month: now.month, day: now.day! + 1, hour: 9)
-        
-        let dateTomorrow = Calendar.current.date(from: tomorrow)!
-        print(dateTomorrow.timeIntervalSince1970)
-        
-
-        dateTimePicker.date = dateTomorrow
-        
-        
-        pacePicker.dataSource = self
-        pacePicker.delegate = self
-        tireSizePicker.dataSource = self
-        tireSizePicker.delegate = self
-        privacyPicker.dataSource = self
-        privacyPicker.delegate = self
-        rideMap.delegate = self
-        _ = loadLatestRoutefromRWGPS()
-        
-        RideNameTextField.placeholder = RideTitle
-        
-        
-        
-    }
     
+    
+
     
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(true)
-        
+        print(meetupLocation)
         if let pointLocation = rideStartLocation {
-            let placemark = MKPlacemark(coordinate: pointLocation)
+            let meetupPointPlacemark = MKPlacemark(coordinate: pointLocation)
             
             rideMap.removeAnnotations(rideMap.annotations)
-            rideMap.addAnnotation(placemark)
+            rideMap.addAnnotation(meetupPointPlacemark)
+        }
+        
+        if let authToken = defaults.string(forKey: "RWGPSAuthKey") {
+        _ = loadLatestRoutefromRWGPS()
+            RideNameTextField.placeholder = RideTitle
+
         }
         
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "mapSegue" {
-            _ = segue.destination as! UINavigationController
-        }
-    }
+
     
     @IBAction func unwindToCreationView(_ sender: UIStoryboardSegue) {
-        
-    }
-    
-    
-    
-}
 
-extension RideCreationViewController: UIPickerViewDataSource, UIPickerViewDelegate {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        let placemark = MKPlacemark(coordinate: meetupLocation!)
+        rideMap.removeAnnotations(rideMap.annotations)
+        rideMap.addAnnotation(placemark)
         
-        
-        switch pickerView {
-        case pacePicker:
-            return paceChoices.allCases.count
-        case tireSizePicker:
-            return tireChoices.allCases.count
-        case privacyPicker:
-            return privacyChoices.allCases.count
-        default: return 0
-            
+        //sets the meetup location 
+        if let meetupLocation = meetupLocation {
+            newride.meetupLocation = GeoPoint(latitude: meetupLocation.latitude, longitude: meetupLocation.longitude)
         }
-        
-        
-        
-        
-        //        if pickerView == pacePicker {
-        //            return paceChoices.allCases.count
-        //
-        //        } else if pickerView == tireSizePicker{
-        //            return tireChoices.allCases.count
-        //
-        //        } else if pickerView == privacyPicker{
-        //            return privacyChoices.allCases.count
-        //        }
-        //        return 0
-        
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        switch pickerView {
-        case pacePicker:
-            pace = paceChoices.allCases[row]
-            newride.ridePace = pace
-            return paceChoices.allCases[row].rawValue
-        case tireSizePicker:
-            recommendedTireSize = tireChoices.allCases[row]
-            newride.minTire = recommendedTireSize
-            return tireChoices.allCases[row].rawValue
-        case privacyPicker:
-            privacySetting = privacyChoices.allCases[row]
-            newride.ridePrivacy = privacySetting
-            return privacyChoices.allCases[row].rawValue
-        default: return ""
-            
-        }
-        
-        //        if pickerView == pacePicker {
-        //            return paceChoices.allCases[row].rawValue
-        //
-        //        } else if pickerView == tireSizePicker{
-        //            return tireChoices.allCases[row].rawValue
-        //
-        //        } else if pickerView == privacyPicker{
-        //            return privacyChoices.allCases[row].rawValue
-        //        }
-        //        return ""
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        switch pickerView {
-        case pacePicker:
-            pace = paceChoices.allCases[row]
-            newride.ridePace = pace
-        case tireSizePicker:
-            recommendedTireSize = tireChoices.allCases[row]
-            newride.minTire = recommendedTireSize
-        case privacyPicker:
-            privacySetting = privacyChoices.allCases[row]
-            newride.ridePrivacy = privacySetting
-        default: return
-            
-        }
-        
-        
-        
-        
     }
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//                    try self.db.collection("Routes").document("\(subZip)").collection("\(zipCode)").document("\(NSDate.now)").setData(from: shareRoute)
-
-//                            ["name": "\(newride.StartTime)",
-//                    "route": "\(newride.minTire?.rawValue)"])
-//                { err in
-//                    if let err = err {
-//                        print("Error adding document: \(err)")
-//                    } else {
-//                        print("Document added with ID: \(ref!.documentID)")
-//                            }
-//                        }
-//                self.db.collection("Routes").document("\(subZip)").collection("\(zipCode)").document("97203").setData([ "test": "\(newride.StartTime!)"]) { err in
-//                    if let err = err {
-//                        print("Error writing document: \(err)")
-//                    } else {
-//                        print("Document successfully written!")
-//                    }
-//                }
-
-
-//            }
-//        }
-
-//        db.collection("Routes").document("\(9000)").setData([ "ride1": "\(newride.StartTime)"

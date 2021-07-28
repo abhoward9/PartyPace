@@ -19,6 +19,8 @@ struct RideWithUserPreferences: Codable {
     var ridePace: paceChoices?
     var route: String?
     var minTire: tireChoices?
+    var meetupLocation: GeoPoint?
+
     
 //    init(rideName: String?, time: Date, paceSetting: paceChoices, tireRecommendation: tireChoices, privacySetting: privacyChoices) {
 //        name = rideName

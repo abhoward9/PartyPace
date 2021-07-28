@@ -7,19 +7,25 @@
 
 import Foundation
 
+let defaults = UserDefaults.standard
 
 func baseURLString() -> String {
     return "https://ridewithgps.com"
 }
 
+func currentUserURLString() -> String {
+    return baseURLString() + "/users/current.json"
+}
+
 func userRoutesURLString(userID: Int) -> String {
-    //MARK: MY ID
     return baseURLString() + "/users/\(userID)/routes.json"
 }
 
 func routeDetailsURLString(routeID: Int) -> String {
     return baseURLString() + "/routes/\(routeID).json"
 }
+
+
 
 //Creates request to pass route ID and get details of route like GPS coordinates
 func getRouteDetailsRequest(routeID: Int, query: [String: String]) -> URLRequest? {
@@ -43,6 +49,8 @@ func getRouteDetailsRequest(routeID: Int, query: [String: String]) -> URLRequest
     
     return request
 }
+
+
 
 
 //
@@ -70,6 +78,31 @@ func getUserRoutesURLRequest(userID: Int, query: [String: String]) -> URLRequest
 
 typealias query = [String: String]
 
+func getAuthTokenURLRequest(query: query) -> URLRequest? {
+    
+    let url = URL(string: currentUserURLString())
+
+ 
+    guard let newURL = url!.withQueries(query) else { fatalError() }
+    
+    
+    
+//    guard let requestUrl = newURL else { fatalError() }
+
+    // Create URL Request
+    var request = URLRequest(url: newURL)
+
+    // Specify HTTP Method to use
+    request.httpMethod = "GET"
+
+
+    
+    return request
+    
+    
+}
+
+
 func getNumberOfUserRoutesURLRequest(userID: Int) -> URLRequest? {
     
     let userRouteQueryItems: query = [
@@ -78,7 +111,7 @@ func getNumberOfUserRoutesURLRequest(userID: Int) -> URLRequest? {
           "limit": "0",
           "apikey": "674d66d1",
 //          "version": "2",
-          "auth_token": "b3a08a5799f1810825666a6e84913e18"
+          "auth_token": defaults.string(forKey: "RWGPSAuthKey")!
         
     ]
 
@@ -99,7 +132,7 @@ func getIDOfLatestRoute(numberOfRoutes: Int, userID: Int) -> URLRequest? {
           "limit": "1",
           "apikey": "674d66d1",
 //          "version": "2",
-          "auth_token": "b3a08a5799f1810825666a6e84913e18"
+          "auth_token": defaults.string(forKey: "RWGPSAuthKey")!
         
     ]
 
@@ -118,7 +151,7 @@ func createUserRouteDetailsRequest(routeID: Int) -> URLRequest? {
 
           "apikey": "674d66d1",
           "version": "2",
-          "auth_token": "b3a08a5799f1810825666a6e84913e18"
+          "auth_token": defaults.string(forKey: "RWGPSAuthKey")!
         
     ]
     
