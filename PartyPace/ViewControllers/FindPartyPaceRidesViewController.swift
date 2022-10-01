@@ -11,15 +11,11 @@ import FirebaseDatabase
 import FirebaseFirestore
 
 class FindPartyPaceRidesViewController: UIViewController, CLLocationManagerDelegate {
-    @IBAction func mapTapped(_ sender: UITapGestureRecognizer) {
-
-        print("map tapped")
-    }
-    
-
     
     @IBOutlet weak var LocalRidesTableView: UITableView!
+    let locationManager = CLLocationManager()
     var ridesInArea = [RideWithUserPreferences]()
+    var selectedRow: Int?
     
     private let refreshControl = UIRefreshControl()
 //    @IBAction func FindRidesButtonPressed(_ sender: Any) {
@@ -65,7 +61,7 @@ class FindPartyPaceRidesViewController: UIViewController, CLLocationManagerDeleg
                                 switch result {
                                 case .success(let ride):
                                     if let ride = ride {
-                                        // A `City` value was successfully initialized from the DocumentSnapshot.
+                      
                                         self.ridesInArea.append(ride)
                                         self.LocalRidesTableView.reloadData()
                                         self.refreshControl.endRefreshing()
@@ -98,7 +94,6 @@ class FindPartyPaceRidesViewController: UIViewController, CLLocationManagerDeleg
         
     }
     
-    let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -123,16 +118,15 @@ class FindPartyPaceRidesViewController: UIViewController, CLLocationManagerDeleg
 
     }
     
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "detailViewSegue" {
+            if let destVC = segue.destination as? RideDetailViewController {
+//                let targetController = destVC.topViewController as? ReceiveViewController {
+//                targetController.data = "hello from ReceiveVC !"
+                destVC.DisplayedRide = ridesInArea[selectedRow!]
+            }
+        }
+    }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print("location updated")
@@ -146,6 +140,7 @@ class FindPartyPaceRidesViewController: UIViewController, CLLocationManagerDeleg
 
 extension FindPartyPaceRidesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(ridesInArea.count)
         return ridesInArea.count
     }
     
@@ -154,12 +149,27 @@ extension FindPartyPaceRidesViewController: UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // create a new cell if needed or reuse an old one
         
-        let cell = LocalRidesTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        
-        // set the text from the data model
+//        let cell = LocalRidesTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+//
+//        // set the text from the data model
+        print(ridesInArea.count)
+
+        let cell = tableView.dequeueReusableCell(withIdentifier: "LocalRideCell", for: indexPath) as! LocalRideCell
         cell.textLabel?.text = self.ridesInArea[indexPath.row].name
-        
+
+//            let country = countries[indexPath.row]
+//            cell.countryTitleLabel?.text = country.name
+//        cell.countryTextLabel?.text = country.isoCode
+//        cell.countryImageView?.image = UIImage(named: country.isoCode)
+
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        selectedRow = indexPath.row
+        performSegue(withIdentifier: "detailViewSegue", sender: UITapGestureRecognizer.self)
+
     }
     
     
@@ -167,7 +177,7 @@ extension FindPartyPaceRidesViewController: UITableViewDelegate, UITableViewData
     
 }
 
-class cell: UITableViewCell {
+class LocalRideCell: UITableViewCell {
     
     
 }

@@ -14,21 +14,21 @@ import FirebaseFirestoreSwift
 import CoreGPX
 
 
-class RideCreationViewController: UIViewController {
-    var gpxRoute = GPXRoute()
-    var mapPoints = [CLLocationCoordinate2D]()
-    
+class RideSettingsConfirmationViewController: superClass {
+//    var gpxRoute = GPXRoute()
+//    var mapPoints = [CLLocationCoordinate2D]()
+//
     var RideStartLocation: CLLocation?
-    var RideTitle: String?
+//    var RideTitle: String?
+//
+//
+//    var userRoutesResults: Results?
     
     
-    var userRoutesResults: Results?
     
-    
-    
-    @IBAction func meetuplocationpressed(_ sender: Any) {
-        print(meetupLocation)
-    }
+//    @IBAction func meetuplocationpressed(_ sender: Any) {
+//        print(meetupLocation)
+//    }
     
     var authToken: String!
     
@@ -36,7 +36,7 @@ class RideCreationViewController: UIViewController {
     @IBOutlet weak var rideTitleField: UITextField!
     @IBOutlet weak var tireSizeLabel: UILabel!
     @IBOutlet weak var paceLabel: UILabel!
-    @IBOutlet weak var rideMap: MKMapView!
+//    @IBOutlet weak var fullMapView: MKMapView!
     
     @IBOutlet weak var dateTimePicker: UIDatePicker!
     @IBOutlet weak var pacePicker: UIPickerView!
@@ -53,7 +53,7 @@ class RideCreationViewController: UIViewController {
         super.viewDidLoad()
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapImageView(_:)))
-        rideMap.addGestureRecognizer(tapGestureRecognizer)
+        fullMapView.addGestureRecognizer(tapGestureRecognizer)
         let now = Calendar.current.dateComponents(in: .current, from: Date())
 
         // Create the start of the day in `DateComponents` by leaving off the time.
@@ -66,7 +66,6 @@ class RideCreationViewController: UIViewController {
         let tomorrow = DateComponents(year: now.year, month: now.month, day: now.day! + 1, hour: 9)
         
         let dateTomorrow = Calendar.current.date(from: tomorrow)!
-        print(dateTomorrow.timeIntervalSince1970)
      
 
         dateTimePicker.date = dateTomorrow
@@ -78,11 +77,12 @@ class RideCreationViewController: UIViewController {
         tireSizePicker.delegate = self
         privacyPicker.dataSource = self
         privacyPicker.delegate = self
-        rideMap.delegate = self
+        fullMapView.delegate = self
         
         if let authToken = defaults.string(forKey: "RWGPSAuthKey") {
         _ = loadLatestRoutefromRWGPS()
-            RideNameTextField.placeholder = RideTitle
+
+//            RideNameTextField.placeholder = RideTitle
 
         }
         
@@ -94,7 +94,8 @@ class RideCreationViewController: UIViewController {
     
     @IBAction func CreateRideButtonPressed(_ sender: Any) {
         
-        
+        let geocoder = CLGeocoder()
+
         if RideNameTextField.text == "" {
             newride.name = RideNameTextField.placeholder
 
@@ -105,7 +106,6 @@ class RideCreationViewController: UIViewController {
         newride.StartTime = dateTimePicker.date
         newride.coordinate = GeoPoint(latitude: (RideStartLocation?.coordinate.latitude)!, longitude: (RideStartLocation?.coordinate.longitude)!)
         
-        let geocoder = CLGeocoder()
         
 //        let location = CLLocation(latitude: newride.coordinate!.latitude, longitude: newride.coordinate!.longitude)
         
@@ -149,21 +149,6 @@ class RideCreationViewController: UIViewController {
     var privacySetting: privacyChoices?
     
     
-    
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?)  {
-//      if segue.identifier == "fullMapViewSegue",
-//         let gamePickerViewController = segue.destination as? StartPointViewController {
-//        gamePickerViewController.gpxRoute = gpxRoute
-////        gamePickerViewController.mapPoints = mapPoints
-////
-////        gamePickerViewController.RideStartLocation = RideStartLocation
-////
-////        gamePickerViewController.userRoutesResults = userRoutesResults
-//
-//      }
-//    }
-    
     @IBAction func didTapImageView(_ sender: UITapGestureRecognizer) {
         performSegue(withIdentifier: "fullMapViewSegue", sender: UITapGestureRecognizer.self)
         }
@@ -179,8 +164,8 @@ class RideCreationViewController: UIViewController {
         if let pointLocation = rideStartLocation {
             let meetupPointPlacemark = MKPlacemark(coordinate: pointLocation)
             
-            rideMap.removeAnnotations(rideMap.annotations)
-            rideMap.addAnnotation(meetupPointPlacemark)
+            fullMapView.removeAnnotations(fullMapView.annotations)
+            fullMapView.addAnnotation(meetupPointPlacemark)
         }
         
         if let authToken = defaults.string(forKey: "RWGPSAuthKey") {
@@ -196,8 +181,8 @@ class RideCreationViewController: UIViewController {
     @IBAction func unwindToCreationView(_ sender: UIStoryboardSegue) {
 
         let placemark = MKPlacemark(coordinate: meetupLocation!)
-        rideMap.removeAnnotations(rideMap.annotations)
-        rideMap.addAnnotation(placemark)
+        fullMapView.removeAnnotations(fullMapView.annotations)
+        fullMapView.addAnnotation(placemark)
         
         //sets the meetup location 
         if let meetupLocation = meetupLocation {

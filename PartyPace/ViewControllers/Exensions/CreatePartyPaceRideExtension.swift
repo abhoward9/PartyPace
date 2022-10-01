@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-extension RideCreationViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+extension RideSettingsConfirmationViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }

@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		492DCF80269D4D4F00BB22ED /* URLBuilderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492DCF7F269D4D4F00BB22ED /* URLBuilderManager.swift */; };
+		4948570A26B13FA2001906A7 /* RideDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4948570926B13FA2001906A7 /* RideDetailViewController.swift */; };
 		49487F0926A8FA2D00132BAB /* CreatePartyPaceRideExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49487F0826A8FA2D00132BAB /* CreatePartyPaceRideExtension.swift */; };
 		4951B60F2689662300ADD5AA /* RideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4951B60E2689662300ADD5AA /* RideViewController.swift */; };
 		498DDA5E2699663300D67C73 /* OptionsForRide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498DDA5D2699663300D67C73 /* OptionsForRide.swift */; };
 		49903C51267C6AE600814BA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49903C50267C6AE600814BA6 /* AppDelegate.swift */; };
 		49903C53267C6AE600814BA6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49903C52267C6AE600814BA6 /* SceneDelegate.swift */; };
-		49903C55267C6AE600814BA6 /* RideCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49903C54267C6AE600814BA6 /* RideCreationViewController.swift */; };
+		49903C55267C6AE600814BA6 /* RideSettingsConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49903C54267C6AE600814BA6 /* RideSettingsConfirmationViewController.swift */; };
 		49903C58267C6AE600814BA6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49903C56267C6AE600814BA6 /* Main.storyboard */; };
 		49903C5A267C6AE700814BA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49903C59267C6AE700814BA6 /* Assets.xcassets */; };
 		49903C5D267C6AE700814BA6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49903C5B267C6AE700814BA6 /* LaunchScreen.storyboard */; };
@@ -35,13 +36,14 @@
 		3A630C538408D9D823BC97C6 /* Pods-PartyPace.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PartyPace.debug.xcconfig"; path = "Target Support Files/Pods-PartyPace/Pods-PartyPace.debug.xcconfig"; sourceTree = "<group>"; };
 		437F9E8FFDBF5F801D06BCA2 /* Pods_PartyPace.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PartyPace.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		492DCF7F269D4D4F00BB22ED /* URLBuilderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLBuilderManager.swift; sourceTree = "<group>"; };
+		4948570926B13FA2001906A7 /* RideDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideDetailViewController.swift; sourceTree = "<group>"; };
 		49487F0826A8FA2D00132BAB /* CreatePartyPaceRideExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePartyPaceRideExtension.swift; sourceTree = "<group>"; };
 		4951B60E2689662300ADD5AA /* RideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideViewController.swift; sourceTree = "<group>"; };
 		498DDA5D2699663300D67C73 /* OptionsForRide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsForRide.swift; sourceTree = "<group>"; };
 		49903C4D267C6AE600814BA6 /* PartyPace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PartyPace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49903C50267C6AE600814BA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49903C52267C6AE600814BA6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		49903C54267C6AE600814BA6 /* RideCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideCreationViewController.swift; sourceTree = "<group>"; };
+		49903C54267C6AE600814BA6 /* RideSettingsConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideSettingsConfirmationViewController.swift; sourceTree = "<group>"; };
 		49903C57267C6AE600814BA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		49903C59267C6AE700814BA6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49903C5C267C6AE700814BA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -81,6 +83,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		4948570826B126E8001906A7 /* Archive */ = {
+			isa = PBXGroup;
+			children = (
+				4951B60E2689662300ADD5AA /* RideViewController.swift */,
+			);
+			path = Archive;
+			sourceTree = "<group>";
+		};
 		49487F0726A8FA0A00132BAB /* Exensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -110,13 +120,14 @@
 		49903C4F267C6AE600814BA6 /* PartyPace */ = {
 			isa = PBXGroup;
 			children = (
+				49903C56267C6AE600814BA6 /* Main.storyboard */,
 				49FDFD2C267FF02200535301 /* ViewControllers */,
 				49903C66267C6B7500814BA6 /* Models */,
 				49903C50267C6AE600814BA6 /* AppDelegate.swift */,
 				49903C52267C6AE600814BA6 /* SceneDelegate.swift */,
-				49903C56267C6AE600814BA6 /* Main.storyboard */,
 				49903C59267C6AE700814BA6 /* Assets.xcassets */,
 				49903C5B267C6AE700814BA6 /* LaunchScreen.storyboard */,
+				4948570826B126E8001906A7 /* Archive */,
 				49903C5E267C6AE700814BA6 /* Info.plist */,
 				49B2AB182693A5FC002FBAF3 /* GoogleService-Info.plist */,
 				49903C6B267DB5EC00814BA6 /* RideOrganizationViewController.swift */,
@@ -141,13 +152,13 @@
 			isa = PBXGroup;
 			children = (
 				49487F0726A8FA0A00132BAB /* Exensions */,
-				49903C54267C6AE600814BA6 /* RideCreationViewController.swift */,
+				49903C54267C6AE600814BA6 /* RideSettingsConfirmationViewController.swift */,
 				49B4BFF226AE907F0066ED17 /* StartPointViewController.swift */,
 				49FDFD2D267FF08100535301 /* MapViewController.swift */,
-				4951B60E2689662300ADD5AA /* RideViewController.swift */,
 				49BB56C026A4B8650069FCD0 /* FindPartyPaceRidesViewController.swift */,
 				49B2AB16269396D4002FBAF3 /* miniMap.swift */,
 				49B4BFF026AE00AD0066ED17 /* RWGPSAuthViewController.swift */,
+				4948570926B13FA2001906A7 /* RideDetailViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -275,7 +286,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49903C55267C6AE600814BA6 /* RideCreationViewController.swift in Sources */,
+				49903C55267C6AE600814BA6 /* RideSettingsConfirmationViewController.swift in Sources */,
+				4948570A26B13FA2001906A7 /* RideDetailViewController.swift in Sources */,
 				498DDA5E2699663300D67C73 /* OptionsForRide.swift in Sources */,
 				49903C51267C6AE600814BA6 /* AppDelegate.swift in Sources */,
 				49903C6C267DB5EC00814BA6 /* RideOrganizationViewController.swift in Sources */,
